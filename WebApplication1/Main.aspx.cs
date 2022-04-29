@@ -19,5 +19,11 @@ namespace WebApplication1
             Session["type"] = "customer";
             Response.Redirect("customerUEN.aspx");
         }
+
+        protected void lbtnStaff_Click(object sender, EventArgs e)
+        {
+            Session["type"] = "staff";
+            Response.Redirect("Login.aspx");
+        }
     }
 }

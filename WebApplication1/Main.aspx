@@ -18,7 +18,7 @@
 				</asp:LinkButton>
 			</td>
 			<td>
-				<asp:LinkButton ID="lbtnStaff" runat="server" style="text-decoration:none" Font-Bold="true">
+				<asp:LinkButton ID="lbtnStaff" runat="server" style="text-decoration:none" Font-Bold="true" OnClick="lbtnStaff_Click">
 					<img class="btnImage" src="../Images/staff.png" alt="Staff" />
 					<div class="btnDiv">
 						Staff
