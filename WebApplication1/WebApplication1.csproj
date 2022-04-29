@@ -105,6 +105,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="C:\Users\Wiljohn\Desktop\drive-download-20220429T121913Z-001\Credentials.mdf">
+      <Link>App_Data\Credentials.mdf</Link>
+    </Content>
+    <Content Include="C:\Users\Wiljohn\Desktop\drive-download-20220429T121913Z-001\Credentials_log.ldf">
+      <Link>App_Data\Credentials_log.ldf</Link>
+      <DependentUpon>Credentials.mdf</DependentUpon>
+    </Content>
+    <Content Include="C:\Users\Wiljohn\Desktop\drive-download-20220429T121913Z-001\dbo.Credentials.sql">
+      <Link>App_Data\dbo.Credentials.sql</Link>
+    </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -132,6 +142,7 @@
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Images\customer.png" />
     <Content Include="Images\staff.png" />
+    <Content Include="Login.aspx" />
     <Content Include="Main.aspx" />
     <Content Include="Masterpage.Master.vb" />
     <Content Include="Scripts\bootstrap.js" />
@@ -200,6 +211,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Main.aspx.cs">
       <DependentUpon>Main.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -224,7 +242,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="Class\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
