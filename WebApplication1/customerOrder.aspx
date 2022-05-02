@@ -6,7 +6,7 @@
     <div align="center">
         <h3>Table No: <asp:Label ID="lblTableNo" runat="server"></asp:Label></h3>
     </div>
-    <asp:GridView ID="gvOrder" Width="70%" runat="server" RowStyle-Font-Bold="true" HeaderStyle-Font-Bold="true" OnRowCommand="gvOrder_RowCommand" BorderWidth="4px" BorderColor="#dbddff" AutoGenerateColumns="false" Height="100%">
+    <asp:GridView ID="gvOrder" Width="70%" runat="server" RowStyle-Font-Bold="true" HeaderStyle-Font-Bold="true" OnRowCommand="gvOrder_RowCommand" BorderWidth="4px" BorderColor="#dbddff" AutoGenerateColumns="false" Height="100%" OnSelectedIndexChanged="gvOrder_SelectedIndexChanged">
             <Columns>
                 <asp:BoundField DataField="menu" HeaderText="Menu" HeaderStyle-Width="20%" />
                 <asp:BoundField DataField="price" HeaderText="Price" HeaderStyle-Width="30%" />

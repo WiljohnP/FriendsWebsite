@@ -21,7 +21,7 @@ namespace WebApplication1
         {
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["LoginConnectionString"].ConnectionString);
             con.Open();
-            string query_user = "SELECT count(*) FROM Credentials WHERE Username='" + TextBox1.Text + "'";
+            string query_user = "SELECT count(*) FROM [dbo].[User] WHERE Username='" + TextBox1.Text + "'";
             SqlCommand user_com = new SqlCommand(query_user, con);
             int temp = Convert.ToInt32(user_com.ExecuteScalar().ToString());
             con.Close();
@@ -29,14 +29,22 @@ namespace WebApplication1
             if (temp == 1)
             {
                 con.Open();
-                string query_pass = "SELECT Password FROM Credentials WHERE Username='" + TextBox1.Text + "'";
-                SqlCommand pass_com = new SqlCommand(query_pass, con);
-                string temp_password = pass_com.ExecuteScalar().ToString();
+                string query_pass = "SELECT u.username, r.roleType  from [dbo].[User] u inner join [dbo].[Role] r ON u.type = r.Id where username = '" + TextBox1.Text + "'";
+                SqlCommand reader_com = new SqlCommand(query_pass, con);
+                SqlDataReader dr = reader_com.ExecuteReader();
+                string temp_password = "";
+                string role = "";
+                while (dr.Read())
+                {
+                    temp_password = dr[0].ToString();
+                    role = dr[1].ToString();
+                }
                 con.Close();
                 if (temp_password.Trim() == TextBox2.Text.Trim())
                 {
                     Response.Write("<script>alert('Login Successful!!')</script>");
                     Session["New"] = TextBox1.Text;
+                    Session["Role"] = role;
                     Response.Redirect("Home.aspx");
                 }
                 else

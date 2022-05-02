@@ -7,11 +7,12 @@ using System.Web.UI.WebControls;
 
 namespace WebApplication1
 {
-    public partial class Site1 : System.Web.UI.MasterPage
+    public partial class Home : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            lblUsername.Text = Session["New"].ToString();
+            lblRole.Text = Session["Role"].ToString();
         }
     }
 }
