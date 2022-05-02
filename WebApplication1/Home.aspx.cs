@@ -11,8 +11,16 @@ namespace WebApplication1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            lblUsername.Text = Session["New"].ToString();
-            lblRole.Text = Session["Role"].ToString();
+            if (Session["New"] != null) // && Session["type"].ToString() != "customer") 
+            {
+                lblUsername.Text = Session["New"].ToString();
+                lblRole.Text = Session["Role"].ToString();
+            }
+            else 
+            {
+                Response.Redirect("Login.aspx");
+            }
+            
         }
     }
 }

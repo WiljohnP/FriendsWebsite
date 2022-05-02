@@ -16,5 +16,11 @@ namespace WebApplication1
                 lblLogOut.Text = "";
             }
         }
+
+        protected void lblLogOut_Click(object sender, EventArgs e)
+        {
+            Session["New"] = null;
+            Response.Redirect("Login.aspx");
+        }
     }
 }

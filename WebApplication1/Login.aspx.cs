@@ -25,7 +25,6 @@ namespace WebApplication1
             SqlCommand user_com = new SqlCommand(query_user, con);
             int temp = Convert.ToInt32(user_com.ExecuteScalar().ToString());
             con.Close();
-            //System.Diagnostics.Debug.WriteLine(temp);
             if (temp == 1)
             {
                 con.Open();

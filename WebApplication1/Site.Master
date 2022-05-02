@@ -21,7 +21,7 @@
         
         <ul class="topnav">
          <li class="right">
-                <asp:LinkButton ID="lblLogOut" runat="server">Log Out</asp:LinkButton></li>
+                <asp:LinkButton ID="lblLogOut" runat="server" OnClick="lblLogOut_Click">Log Out</asp:LinkButton></li>
         </ul>
 
         
