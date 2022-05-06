@@ -145,6 +145,10 @@
     <Content Include="Images\staff.png" />
     <Content Include="Login.aspx" />
     <Content Include="Main.aspx" />
+    <Content Include="managerMenu.aspx" />
+    <Content Include="managerMenuDetail.aspx" />
+    <Content Include="managerUser.aspx" />
+    <Content Include="managerUserDetail.aspx" />
     <Content Include="Masterpage.Master.vb" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -181,6 +185,7 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controller\UserControl.cs" />
     <Compile Include="customerCart.aspx.cs">
       <DependentUpon>customerCart.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -209,6 +214,7 @@
     <Compile Include="customerUEN.aspx.designer.cs">
       <DependentUpon>customerUEN.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Entity\User.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -233,6 +239,34 @@
     <Compile Include="Main.aspx.designer.cs">
       <DependentUpon>Main.aspx</DependentUpon>
     </Compile>
+    <Compile Include="managerMenu.aspx.cs">
+      <DependentUpon>managerMenu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="managerMenu.aspx.designer.cs">
+      <DependentUpon>managerMenu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="managerMenuDetail.aspx.cs">
+      <DependentUpon>managerMenuDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="managerMenuDetail.aspx.designer.cs">
+      <DependentUpon>managerMenuDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="managerUser.aspx.cs">
+      <DependentUpon>managerUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="managerUser.aspx.designer.cs">
+      <DependentUpon>managerUser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="managerUserDetail.aspx.cs">
+      <DependentUpon>managerUserDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="managerUserDetail.aspx.designer.cs">
+      <DependentUpon>managerUserDetail.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
@@ -249,9 +283,7 @@
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Class\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
