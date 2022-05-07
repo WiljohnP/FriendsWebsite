@@ -53,10 +53,10 @@ namespace WebApplication1.Entity
 
         public string[] getPass(string tb1)
         {
-            //gets password is user
+            //gets password of inputted username
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["LoginConnectionString"].ConnectionString);
             con.Open();
-            string query_pass = "SELECT u.username, r.roleType  from [dbo].[User] u inner join [dbo].[Role] r ON u.type = r.Id where username = '" + tb1 + "'";
+            string query_pass = "SELECT u.password, r.roleType  from [dbo].[User] u inner join [dbo].[Role] r ON u.type = r.Id where username = '" + tb1 + "'";
             SqlCommand reader_com = new SqlCommand(query_pass, con);
             SqlDataReader dr = reader_com.ExecuteReader();
             string[] strDr = new string[2];

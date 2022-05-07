@@ -6,6 +6,8 @@ using System.Data;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace WebApplication1.Controller
 {
@@ -48,13 +50,15 @@ namespace WebApplication1.Controller
 
         public string validatePassword(string tb1, string tbpassword)
         {
+            
             WebApplication1.Entity.User us = new WebApplication1.Entity.User();
             string[] dr = us.getPass(tb1);
-
-            string temp_password = dr[0];
+            string hashFromDB = dr[0];
             string role = dr[1];
-            
-            if (temp_password == tbpassword)
+
+            string hashFromInput = hashPlaintext(tbpassword);
+
+            if (hashFromInput == hashFromDB)
             {
                 return role;
             }
@@ -63,5 +67,14 @@ namespace WebApplication1.Controller
                 return "wrong password";
             }
         }
+
+        public string hashPlaintext(string pass) 
+        {
+            var algorithm = SHA512.Create();
+            var hashedBytes = algorithm.ComputeHash(Encoding.UTF8.GetBytes(pass));
+            string hash = BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
+            return hash;
+        }
+
     }
 }

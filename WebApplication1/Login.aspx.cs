@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
-using static WebApplication1.Controller.UserControl;
+
 
 namespace WebApplication1
 {
@@ -15,8 +15,9 @@ namespace WebApplication1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            
         }
+
 
         protected void Button1_Click(object sender, EventArgs e)
         {
