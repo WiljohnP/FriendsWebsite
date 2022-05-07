@@ -37,5 +37,36 @@ namespace WebApplication1.Entity
 
             return data;
         }
+
+        public int checkUser(string tb1)
+        {
+            //checks for user in database by counting number of user with inputted username. the valid answer can only be 1.
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["LoginConnectionString"].ConnectionString);
+            con.Open();
+            string query_user = "SELECT count(*) FROM [dbo].[User] WHERE Username='" + tb1 + "'";
+            SqlCommand user_com = new SqlCommand(query_user, con);
+            int userExists = Convert.ToInt32(user_com.ExecuteScalar().ToString());
+            con.Close();
+
+            return userExists;
+        }
+
+        public string[] getPass(string tb1)
+        {
+            //gets password is user
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["LoginConnectionString"].ConnectionString);
+            con.Open();
+            string query_pass = "SELECT u.username, r.roleType  from [dbo].[User] u inner join [dbo].[Role] r ON u.type = r.Id where username = '" + tb1 + "'";
+            SqlCommand reader_com = new SqlCommand(query_pass, con);
+            SqlDataReader dr = reader_com.ExecuteReader();
+            string[] strDr = new string[2];
+            while (dr.Read())
+            {
+                strDr[0] = dr[0].ToString().Trim();
+                strDr[1] = dr[1].ToString();
+            }
+            con.Close();
+            return strDr;
+        }
     }
 }
