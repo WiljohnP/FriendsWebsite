@@ -11,9 +11,13 @@ namespace WebApplication1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if ((Session["type"].ToString() == "customer") || (Session["type"].ToString() == null))
+            if (Session["Role"].ToString() == null)
             {
-                lblLogOut.Text = "";
+                lblLogOut.Visible = false;
+            }
+            else
+            {
+                lblLogOut.Visible = true;
             }
         }
 
