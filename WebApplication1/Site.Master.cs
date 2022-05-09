@@ -24,6 +24,7 @@ namespace WebApplication1
         protected void lblLogOut_Click(object sender, EventArgs e)
         {
             Session["New"] = null;
+            Session["Role"].ToString() == null
             Response.Redirect("Login.aspx");
         }
     }
