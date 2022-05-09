@@ -11,7 +11,7 @@ namespace WebApplication1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["Role"].ToString() == null)
+            if (Session["Role"] == null)
             {
                 lblLogOut.Visible = false;
             }
@@ -24,7 +24,7 @@ namespace WebApplication1
         protected void lblLogOut_Click(object sender, EventArgs e)
         {
             Session["New"] = null;
-            Session["Role"].ToString() == null
+            Session["Role"] = null;
             Response.Redirect("Login.aspx");
         }
     }
