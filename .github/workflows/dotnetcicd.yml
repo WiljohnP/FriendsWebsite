@@ -26,6 +26,9 @@ jobs:
       - name: Setup NuGet
         uses: NuGet/setup-nuget@v1.0.6
         
+      - name: Restore NuGet Packages
+        run: nuget restore WebApplication1.sln
+        
       - name: Build Solution
         run: msbuild WebApplication1.sln
       
