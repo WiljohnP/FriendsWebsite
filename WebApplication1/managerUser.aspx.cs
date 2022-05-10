@@ -12,7 +12,17 @@ namespace WebApplication1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            dataBind();
+            if (!IsPostBack)
+            {
+                if (Session["New"] != null && Session["Role"].ToString() == "manager")
+                {
+                }
+                else
+                {
+                    Response.Redirect("Login.aspx");
+                }
+                dataBind();
+            }
         }
 
         protected void gvUser_RowCommand(object sender, GridViewCommandEventArgs e)

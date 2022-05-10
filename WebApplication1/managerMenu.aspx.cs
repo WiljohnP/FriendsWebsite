@@ -12,16 +12,23 @@ namespace WebApplication1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            dataBind();
+            if (!IsPostBack)
+            {
+                dataBind();
+            }
         }
 
         protected void btnUser_Click(object sender, EventArgs e)
         {
+            Session["New"] = Session["New"].ToString();
+            Session["Role"] = Session["Role"].ToString();
             Response.Redirect("managerUser.aspx");
         }
 
         protected void btnAddMenu_Click(object sender, EventArgs e)
         {
+            Session["New"] = Session["New"].ToString();
+            Session["Role"] = Session["Role"].ToString();
             Response.Redirect("managerMenuDetail.aspx");
         }
 

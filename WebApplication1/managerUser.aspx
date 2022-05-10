@@ -7,11 +7,17 @@
         <asp:Button ID="btnMenu" runat="server" Text="Menu List" OnClick="btnMenu_Click" Width="25%"/>
     </div>
     <br />
+    <div>
+        <h2>User List</h2>
+    </div>
+    <br/>
     <asp:GridView ID="gvUser" Width="70%" runat="server" RowStyle-Font-Bold="true" HeaderStyle-Font-Bold="true" OnRowCommand="gvUser_RowCommand" BorderWidth="4px" BorderColor="#dbddff" AutoGenerateColumns="false" Height="100%">
             <Columns>
                 <asp:BoundField DataField="username" HeaderText="Name" HeaderStyle-Width="20%" />
-                <asp:BoundField DataField="status" HeaderText="Status" HeaderStyle-Width="30%" />
-                <asp:BoundField DataField="roleType" HeaderText="Type" HeaderStyle-Width="30%" />
+                <asp:BoundField DataField="staffNumber" HeaderText="Staff No" HeaderStyle-Width="20%" />
+                <asp:BoundField DataField="phoneNumber" HeaderText="Contact No" HeaderStyle-Width="20%" />
+                <asp:BoundField DataField="status" HeaderText="Status" HeaderStyle-Width="10%" />
+                <asp:BoundField DataField="roleType" HeaderText="Type" HeaderStyle-Width="10%" />
                 <asp:TemplateField ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="20%">
                     <ItemTemplate>
                         <asp:Button ID="btnUpdate" runat="server" Text="Update" CommandArgument='<%# Container.DataItemIndex %>'   CommandName="doUpdate"/>

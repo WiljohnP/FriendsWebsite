@@ -7,6 +7,10 @@
         <asp:Button ID="btnUser" runat="server" Text="User List" OnClick="btnUser_Click" Width="25%"/>
     </div>
     <br />
+    <div>
+        <h2>Menu List</h2>
+    </div>
+    <br/>
     <asp:GridView ID="gvMenu" Width="70%" runat="server" RowStyle-Font-Bold="true" HeaderStyle-Font-Bold="true" OnRowCommand="gvMenu_RowCommand" BorderWidth="4px" BorderColor="#dbddff" AutoGenerateColumns="false" Height="100%">
             <Columns>
                 <asp:BoundField DataField="menu" HeaderText="Menu" HeaderStyle-Width="30%" />
