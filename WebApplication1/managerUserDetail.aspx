@@ -41,7 +41,7 @@
 			  Status:
           </div>
 			<div class="col-50">
-				<asp:dropdownlist runat="server" id="ddStatus"> 
+				<asp:dropdownlist runat="server" id="ddlStatus" Width="100px"> 
 					 <asp:listitem text="Active" value="1" Selected="True"></asp:listitem>
 					 <asp:listitem text="Inactive" value="0"></asp:listitem>
 				</asp:dropdownlist>
@@ -52,7 +52,7 @@
 			  Type:
           </div>
 			<div class="col-50">
-				<asp:dropdownlist runat="server" id="ddlType"> 
+				<asp:dropdownlist runat="server" id="ddlType" Width="100px"> 
 					 <asp:listitem text="Staff" value="1" Selected="True"></asp:listitem>
 					 <asp:listitem text="Manager" value="2"></asp:listitem>
 				</asp:dropdownlist>

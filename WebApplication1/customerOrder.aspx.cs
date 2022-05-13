@@ -17,6 +17,7 @@ namespace WebApplication1
 
         protected void btnCart_Click(object sender, EventArgs e)
         {
+            Session["tableNo"] = lblTableNo.Text;
             Response.Redirect("customerCart.aspx");
         }
 
@@ -25,32 +26,31 @@ namespace WebApplication1
             lblTableNo.Text = "1";
 
             DataTable table = new DataTable();
-            table.Columns.Add("menu", typeof(string));
-            table.Columns.Add("price", typeof(string));
-            table.Columns.Add("type", typeof(string));
 
-            table.Rows.Add("Fish Burger", "$4.50", "Main Dish");
-            table.Rows.Add("Cheese Burger", "$5.00", "Main Dish");
-            table.Rows.Add("Fried Chicken", "$8.00", "Main Dish");
+            Controller.MenuControl mc = new Controller.MenuControl();
 
+            table = mc.retrieveAvaiableMenu();
             gvOrder.DataSource = table;
             gvOrder.DataBind();
         }
 
         protected void gvOrder_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            Int32 Index = -1;
+            Int32 id = 0;
             TextBox txtQuantity = null;
+            Label lblMenu = null;
 
             if (e.CommandName == "doAdd")
             {
-                
+                id = Convert.ToInt32(e.CommandArgument.ToString());
+
             }
         }
 
         protected void btnPayment_Click(object sender, EventArgs e)
         {
-
+            Session["tableNo"] = lblTableNo.Text;
+            Response.Redirect("customerPayment.aspx");
         }
     }
 }

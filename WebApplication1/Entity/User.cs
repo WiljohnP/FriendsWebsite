@@ -22,7 +22,7 @@ namespace WebApplication1.Entity
         {
             DataTable data = new DataTable();
 
-            String sql = "Select u.username, case when u.status = 1 then 'Active' else 'Inactive' end as status, r.roleType from [dbo].[User] as u inner join [dbo].[Role] as r on u.type = r.id";
+            String sql = "Select u.username, u.staffnumber, u.phonenumber, case when u.status = 1 then 'Active' else 'Inactive' end as status, r.roleType from [dbo].[User] as u inner join [dbo].[Role] as r on u.type = r.id";
 
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["LoginConnectionString"].ConnectionString);
             con.Open();
@@ -86,6 +86,67 @@ namespace WebApplication1.Entity
             { 
                 return false; 
             }
+        }
+
+        public bool deleteUser()
+        {
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["LoginConnectionString"].ConnectionString);
+            con.Open();
+            string query = "Delete From [dbo].[User] Where username = '" + username + "' ";
+            
+            try
+            {
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception Ex)
+            {
+                return false;
+            }
+        }
+
+        public bool updateUser()
+        {
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["LoginConnectionString"].ConnectionString);
+            con.Open();
+            string query = "UPDATE [dbo].[User]  SET staffNumber = '" + staffNumber + "', phoneNumber = '" + phoneNumber + "', status = '" + status + "', type = '" + type + "' ";
+            if (password != "")
+            {
+                query += " , password = '" + password + "'";
+            }
+            query += " WHERE username = '" + username + "' ";
+
+            try
+            {
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception Ex)
+            {
+                return false;
+            }
+        }
+
+        public DataTable getUserDetail()
+        {
+            DataTable data = new DataTable();
+
+            String sql = "Select username, staffnumber, phonenumber, status, type from [dbo].[User] where username = '" + username +"'";
+
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["LoginConnectionString"].ConnectionString);
+            con.Open();
+            SqlCommand cmd = new SqlCommand(sql, con);
+
+            // create data adapter
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            // this will query your database and return the result to your datatable
+            da.Fill(data);
+            con.Close();
+            da.Dispose();
+
+            return data;
         }
     }
 }

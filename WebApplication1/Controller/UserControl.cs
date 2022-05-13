@@ -88,5 +88,44 @@ namespace WebApplication1.Controller
             return hash;
         }
 
+        public bool removeUser(string username)
+        {
+            Entity.User us = new Entity.User();
+            us.username = username;
+            bool deleteSuccess = us.deleteUser();
+            return deleteSuccess;
+        }
+
+        public bool modifyUser(string username, string staffNumber, Int32 phoneNumber, int status, string password, int type)
+        {
+            Entity.User us = new Entity.User();
+            us.username = username;
+            us.staffNumber = staffNumber;
+            us.phoneNumber = phoneNumber;
+            us.status = status;
+
+            if (password != "")
+            {
+                us.password = hashPlaintext(password);
+            }
+            else
+            {
+                us.password = "";
+            }
+
+            us.type = type;
+            bool updateSuccess = us.updateUser();
+            return updateSuccess;
+        }
+
+        public DataTable retrieveUserDetail(string username)
+        {
+            DataTable data = new DataTable();
+
+            Entity.User us = new Entity.User();
+            us.username = username;
+            data = us.getUserDetail();
+            return data;
+        }
     }
 }

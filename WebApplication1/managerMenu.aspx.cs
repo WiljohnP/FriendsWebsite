@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
+using System.Text;
 
 namespace WebApplication1
 {
@@ -14,6 +15,13 @@ namespace WebApplication1
         {
             if (!IsPostBack)
             {
+                if (Session["New"] != null && Session["Role"].ToString() == "manager")
+                {
+                }
+                else
+                {
+                    Response.Redirect("Login.aspx");
+                }
                 dataBind();
             }
         }
@@ -27,6 +35,7 @@ namespace WebApplication1
 
         protected void btnAddMenu_Click(object sender, EventArgs e)
         {
+            Session["menuId"] = null;
             Session["New"] = Session["New"].ToString();
             Session["Role"] = Session["Role"].ToString();
             Response.Redirect("managerMenuDetail.aspx");
@@ -34,23 +43,58 @@ namespace WebApplication1
 
         protected void gvMenu_RowCommand(object sender, GridViewCommandEventArgs e)
         {
+            Int32 id = 0;
+            if (e.CommandName == "doUpdate")
+            {
+                id = Convert.ToInt32(e.CommandArgument.ToString());
+                Session["menuId"] = id;
+                Response.Redirect("managerMenuDetail.aspx");
+            }
+            else if (e.CommandName == "doDelete")
+            {
+                id = Convert.ToInt32(e.CommandArgument.ToString());
 
+                Controller.MenuControl mc = new Controller.MenuControl();
+
+                bool deleteSuccess = mc.removeMenu(id);
+                if (deleteSuccess == true)
+                {
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append("<script type='text/javascript'>");
+                    sb.Append("window.onload=function(){");
+                    sb.Append("alert('");
+                    sb.Append("Menu deleted");
+                    sb.Append("');};");
+                    sb.Append("</script>");
+                    ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", sb.ToString());
+                    dataBind();
+                    lblError.Text = "";
+                }
+                else
+                {
+                    lblError.Text = "Delete Error!!!";
+                }
+            }
         }
 
         protected void dataBind()
         {
             DataTable table = new DataTable();
-            table.Columns.Add("menu", typeof(string));
-            table.Columns.Add("price", typeof(string));
-            table.Columns.Add("type", typeof(string));
-            table.Columns.Add("status", typeof(string));
 
-            table.Rows.Add("Fish Burger", "4.50", "Main Dish", "Available");
-            table.Rows.Add("Cheese Burger", "5.00", "Main Dish", "Available");
-            table.Rows.Add("Fried Chicken", "8.00", "Main Dish", "Out of Stock");
+            Controller.MenuControl mc = new Controller.MenuControl();
 
+            table = mc.retrieveMenuList();
             gvMenu.DataSource = table;
             gvMenu.DataBind();
+        }
+
+        protected void gvMenu_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                Button btnDelete = e.Row.FindControl("btnDelete") as Button;
+                btnDelete.Attributes["onclick"] = "return confirm('Do you want to delete this menu?');";
+            }
         }
     }
 }

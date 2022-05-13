@@ -60,13 +60,13 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.TextBox txtPhone;
 
         /// <summary>
-        /// ddStatus control.
+        /// ddlStatus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddStatus;
+        protected global::System.Web.UI.WebControls.DropDownList ddlStatus;
 
         /// <summary>
         /// ddlType control.

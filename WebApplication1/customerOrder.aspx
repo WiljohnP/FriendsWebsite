@@ -6,9 +6,17 @@
     <div align="center">
         <h3>Table No: <asp:Label ID="lblTableNo" runat="server"></asp:Label></h3>
     </div>
-    <asp:GridView ID="gvOrder" Width="70%" runat="server" RowStyle-Font-Bold="true" HeaderStyle-Font-Bold="true" OnRowCommand="gvOrder_RowCommand" BorderWidth="4px" BorderColor="#dbddff" AutoGenerateColumns="false" Height="100%" OnSelectedIndexChanged="gvOrder_SelectedIndexChanged">
+    <asp:GridView ID="gvOrder" Width="70%" runat="server" RowStyle-Font-Bold="true" HeaderStyle-Font-Bold="true" OnRowCommand="gvOrder_RowCommand" BorderWidth="4px" BorderColor="#dbddff" AutoGenerateColumns="false" Height="100%">
             <Columns>
-                <asp:BoundField DataField="menu" HeaderText="Menu" HeaderStyle-Width="20%" />
+                <asp:TemplateField ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="20%" HeaderText="Menu">
+                    <ItemTemplate>
+                        <div style="border: 1px solid black;display:inline-grid;text-align:center;width:120px;height:120px;" >
+								<center><asp:Image runat="server" ID="imgRest" Width="100px" Height="100px" ImageUrl='<%#Eval("path") %>' />
+									 </center>
+								<asp:Label runat="server" ID="lblMenu" Text='<%#Eval("menu") %>'></asp:Label>
+							</div>
+                    </ItemTemplate>
+                </asp:TemplateField>
                 <asp:BoundField DataField="price" HeaderText="Price" HeaderStyle-Width="30%" />
                 <asp:BoundField DataField="type" HeaderText="Type" HeaderStyle-Width="30%" />
                 <asp:TemplateField ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="20%">
@@ -16,7 +24,7 @@
                         <asp:TextBox ID="txtQty" runat="server" TextMode="Number" Width="20%"></asp:TextBox><br />
                         <asp:CompareValidator ID="CompareValidator1" runat="server" ControlToValidate="txtQty" ErrorMessage="Invalid quantity" Operator="GreaterThan" 
 					        Type="Integer" ValueToCompare="0" ForeColor="Red" /><br />
-                        <asp:Button ID="btnAdd" runat="server" Text="Add" CommandArgument='<%# Container.DataItemIndex %>'   CommandName="doAdd"/>
+                        <asp:Button ID="btnAdd" runat="server" Text="Add" CommandArgument='<%# Eval("id") %>'   CommandName="doAdd"/>
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>
