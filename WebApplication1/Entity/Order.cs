@@ -16,11 +16,11 @@ namespace WebApplication1.Entity
         public DateTime createdDt;
         public DateTime modifiedDt;
 
-        public DataTable getOrder()
+        public DataTable getOrderStateId()
         {
             DataTable data = new DataTable();
 
-            String sql = "Select orderStateId from [dbo].[Order] where orderStatedId = '" + menu + "' and tableId = '" + menu + "'";
+            String sql = "Select orderStateId from [dbo].[Order] where orderStatedId = 1 and tableId = '" + tableId + "'";
 
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["LoginConnectionString"].ConnectionString);
             con.Open();
