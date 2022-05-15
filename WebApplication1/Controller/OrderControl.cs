@@ -102,14 +102,6 @@ namespace WebApplication1.Controller
             return updateSucccess;
         }
 
-        public bool modifyOrderState(int tableId)
-        {
-            Entity.Order od = new Entity.Order();
-            od.tableId = tableId;
-            bool updateSucccess = od.updateOrderState();
-            return updateSucccess;
-        }
-
         public int retrieveCheckAllOrderCompleted(int tableId)
         {
             Entity.Order od = new Entity.Order();
