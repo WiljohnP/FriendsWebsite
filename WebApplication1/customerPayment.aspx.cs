@@ -14,11 +14,18 @@ namespace WebApplication1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            dataBind();
+            if (!IsPostBack)
+            {
+                if (Session["tableNo"] != null)
+                {
+                    dataBind();
+                }
+            }
         }
 
         protected void btnMenu_Click(object sender, EventArgs e)
         {
+            Session["tableNo"] = Session["tableNo"];
             Response.Redirect("customerOrder.aspx");
         }
 
@@ -34,23 +41,28 @@ namespace WebApplication1
 
                 if (reVisa.IsMatch(txtCardNo.Text))
                 {
-                    //Response.Write("<script language='javascript'>window.alert('Payment success, Thank you.);window.location='Main.aspx';</script>");
-                    
-                    //StringBuilder sb = new StringBuilder();
-                    //sb.Append("<script type = 'text / javascript'>");
-                    //sb.Append("window.onload=function(){");
-                    //sb.Append("alert('");
-                    //sb.Append("Reservation Created, Please Wait for Confirmation");
-                    //sb.Append("')}; ");
-                    //sb.Append("window.location = '");
-                    //sb.Append("Main.aspx");
-                    //sb.Append("';}");
-                    //sb.Append("</script>");
-                    //ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", sb.ToString());
+                    Controller.OrderControl oc = new Controller.OrderControl();
+
+                    bool updateSuccess = oc.modifyOrderCheckedOut(Convert.ToInt32(Session["tableNo"].ToString()));
+                    if (updateSuccess == true)
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        sb.Append("<script type='text/javascript'>");
+                        sb.Append("window.onload=function(){");
+                        sb.Append("alert('");
+                        sb.Append("Payment Successful, Thank You!!!");
+                        sb.Append("');window.location='Main.aspx';};");
+                        sb.Append("</script>");
+                        ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", sb.ToString());
+                    }
+                    else
+                    {
+                        lblError.Text = "Payment failed";
+                    }
                 }
                 else
                 {
-                    errorText.Attributes["style"] = "display: block; text-align: center; color:red;";
+                    lblError.Text = "Invalid card";
                 }
             }
             else if (ddlCardType.SelectedValue == "Master")
@@ -59,38 +71,52 @@ namespace WebApplication1
 
                 if (reMaster.IsMatch(txtCardNo.Text))
                 {
-                    //Response.Write("<script language='javascript'>window.alert('Payment made with '" + ddlPayment.SelectedValue + "', Thank you.);window.location='Main.aspx';</script>");
+                    Controller.OrderControl oc = new Controller.OrderControl();
+
+                    bool updateSuccess = oc.modifyOrderCheckedOut(Convert.ToInt32(Session["tableNo"].ToString()));
+                    if (updateSuccess == true)
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        sb.Append("<script type='text/javascript'>");
+                        sb.Append("window.onload=function(){");
+                        sb.Append("alert('");
+                        sb.Append("Payment Successful, Thank You!!!");
+                        sb.Append("');window.location='Main.aspx';};");
+                        sb.Append("</script>");
+                        ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", sb.ToString());
+                    }
+                    else
+                    {
+                        lblError.Text = "Payment failed";
+                    }
+
                 }
                 else
                 {
-                    errorText.Attributes["style"] = "display: block; text-align: center; color:red;";
+                    lblError.Text = "Invalid card";
                 }
             }
         }
 
-        protected void gvPayment_RowCommand(object sender, GridViewCommandEventArgs e)
-        {
-
-        }
-
         protected void dataBind()
         {
-            lblTableNo.Text = "1";
+            lblTableNo.Text = Session["tableNo"].ToString();
 
+            Double grandTotal = 0;
             DataTable table = new DataTable();
-            table.Columns.Add("menu", typeof(string));
-            table.Columns.Add("price", typeof(string));
-            table.Columns.Add("type", typeof(string));
-            table.Columns.Add("totPrice", typeof(string));
-            table.Columns.Add("quantity", typeof(string));
 
-            table.Rows.Add("Cheese Burger", "5.00", "Main Dish", "5.00", "1");
-            table.Rows.Add("Fried Chicken", "8.00", "Main Dish", "16.00", "2");
+            Controller.OrderControl oc = new Controller.OrderControl();
 
+            table = oc.retrievePaymentList(Convert.ToInt32(Session["tableNo"].ToString()));
             gvPayment.DataSource = table;
             gvPayment.DataBind();
 
-            lblTotalPrice.Text = "21.00";
+            foreach (DataRow row in table.Rows)
+            {
+                grandTotal += Convert.ToDouble(row["totPrice"]);
+            }
+            String total = String.Format("{0:F2}", grandTotal);
+            lblTotalPrice.Text = total;
         }
 
     }

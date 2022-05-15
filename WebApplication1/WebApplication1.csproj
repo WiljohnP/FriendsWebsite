@@ -124,6 +124,7 @@
     <Content Include="customerCart.aspx" />
     <Content Include="customerOrder.aspx" />
     <Content Include="customerPayment.aspx" />
+    <Content Include="customerReceipt.aspx" />
     <Content Include="customerUEN.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -184,6 +185,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controller\MenuControl.cs" />
     <Compile Include="Controller\OrderControl.cs" />
+    <Compile Include="Controller\TableControl.cs" />
     <Compile Include="Controller\UserControl.cs" />
     <Compile Include="customerCart.aspx.cs">
       <DependentUpon>customerCart.aspx</DependentUpon>
@@ -206,6 +208,13 @@
     <Compile Include="customerPayment.aspx.designer.cs">
       <DependentUpon>customerPayment.aspx</DependentUpon>
     </Compile>
+    <Compile Include="customerReceipt.aspx.cs">
+      <DependentUpon>customerReceipt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="customerReceipt.aspx.designer.cs">
+      <DependentUpon>customerReceipt.aspx</DependentUpon>
+    </Compile>
     <Compile Include="customerUEN.aspx.cs">
       <DependentUpon>customerUEN.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -215,6 +224,7 @@
     </Compile>
     <Compile Include="Entity\Menu.cs" />
     <Compile Include="Entity\Order.cs" />
+    <Compile Include="Entity\Table.cs" />
     <Compile Include="Entity\User.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

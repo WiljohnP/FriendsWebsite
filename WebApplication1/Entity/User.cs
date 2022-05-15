@@ -80,10 +80,12 @@ namespace WebApplication1.Entity
             {
                 SqlCommand cmd = new SqlCommand(query, con);
                 cmd.ExecuteNonQuery();
+                con.Close();
                 return true;
             }
             catch (Exception Ex)
-            { 
+            {
+                con.Close();
                 return false; 
             }
         }
@@ -98,10 +100,12 @@ namespace WebApplication1.Entity
             {
                 SqlCommand cmd = new SqlCommand(query, con);
                 cmd.ExecuteNonQuery();
+                con.Close();
                 return true;
             }
             catch (Exception Ex)
             {
+                con.Close();
                 return false;
             }
         }
@@ -121,10 +125,12 @@ namespace WebApplication1.Entity
             {
                 SqlCommand cmd = new SqlCommand(query, con);
                 cmd.ExecuteNonQuery();
+                con.Close();
                 return true;
             }
             catch (Exception Ex)
             {
+                con.Close();
                 return false;
             }
         }
