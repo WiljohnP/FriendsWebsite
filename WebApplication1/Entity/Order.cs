@@ -116,7 +116,10 @@ namespace WebApplication1.Entity
                     {
                         return false;
                     }
-                    con.Close();
+                    finally
+                    {
+                        con.Close();
+                    }
                 }
                 //update if menu exist in cart
                 else
@@ -136,7 +139,10 @@ namespace WebApplication1.Entity
                     {
                         return false;
                     }
-                    con.Close();
+                    finally
+                    {
+                        con.Close();
+                    }
                 }
             }
         }
