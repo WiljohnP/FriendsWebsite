@@ -22,5 +22,15 @@ namespace WebApplication1.Controller
             data = tb.getTableNo();
             return data;
         }
+
+        public bool checkUENValid(String uen)
+        {
+            bool isValid = false;
+
+            Entity.Table tb = new Entity.Table();
+            tb.uen = uen;
+            isValid = tb.CheckUENExists();
+            return isValid;
+        }
     }
 }
