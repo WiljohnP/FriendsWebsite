@@ -7,15 +7,16 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.Text;
 
+
 namespace WebApplication1
 {
-    public partial class managerMenu : System.Web.UI.Page
+    public partial class StaffMenu : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                if (Session["New"] != null && Session["Role"].ToString() == "manager")
+                if (Session["New"] != null && Session["Role"].ToString() == "staff")
                 {
                 }
                 else
@@ -25,22 +26,6 @@ namespace WebApplication1
                 dataBind();
             }
         }
-
-        protected void btnUser_Click(object sender, EventArgs e)
-        {
-            Session["New"] = Session["New"].ToString();
-            Session["Role"] = Session["Role"].ToString();
-            Response.Redirect("managerUser.aspx");
-        }
-
-        protected void btnAddMenu_Click(object sender, EventArgs e)
-        {
-            Session["menuId"] = null;
-            Session["New"] = Session["New"].ToString();
-            Session["Role"] = Session["Role"].ToString();
-            Response.Redirect("managerMenuDetail.aspx");
-        }
-
         protected void gvMenu_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             Int32 id = 0;
@@ -56,27 +41,9 @@ namespace WebApplication1
 
                 Controller.MenuControl mc = new Controller.MenuControl();
 
-                bool deleteSuccess = mc.removeMenu(id);
-                if (deleteSuccess == true)
-                {
-                    StringBuilder sb = new StringBuilder();
-                    sb.Append("<script type='text/javascript'>");
-                    sb.Append("window.onload=function(){");
-                    sb.Append("alert('");
-                    sb.Append("Menu deleted");
-                    sb.Append("');};");
-                    sb.Append("</script>");
-                    ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", sb.ToString());
-                    dataBind();
-                    //lblError.Text = "";
-                }
-                else
-                {
-                    //lblError.Text = "Delete Error!!!";
-                }
+           
             }
         }
-
         protected void dataBind()
         {
             DataTable table = new DataTable();
@@ -87,7 +54,6 @@ namespace WebApplication1
             gvMenu.DataSource = table;
             gvMenu.DataBind();
         }
-
         protected void gvMenu_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
