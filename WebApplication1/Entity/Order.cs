@@ -21,6 +21,8 @@ namespace WebApplication1.Entity
         public int quantity;
         public double price;
 
+        public string datePart;
+
         public DataTable getCartListExist()
         {
             DataTable data = new DataTable();
@@ -116,7 +118,10 @@ namespace WebApplication1.Entity
                     {
                         return false;
                     }
-                    con.Close();
+                    finally
+                    {
+                        con.Close();
+                    }
                 }
                 //update if menu exist in cart
                 else
@@ -136,7 +141,10 @@ namespace WebApplication1.Entity
                     {
                         return false;
                     }
-                    con.Close();
+                    finally
+                    {
+                        con.Close();
+                    }
                 }
             }
         }
@@ -344,6 +352,65 @@ namespace WebApplication1.Entity
                 con.Close();
                 return false;
             }
+        }
+        public DataTable getDistinctYear()
+        {
+            DataTable data = new DataTable();
+
+            String sql = "select DISTINCT (DATEPART(yy, createdDt)) AS Year from[dbo].[Order]";
+
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["LoginConnectionString"].ConnectionString);
+            con.Open();
+            SqlCommand cmd = new SqlCommand(sql, con);
+
+            // create data adapter
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            // this will query your database and return the result to your datatable
+            da.Fill(data);
+            con.Close();
+            da.Dispose();
+
+            return data;
+        }
+
+        public DataTable getYearlySales()
+        {
+            DataTable data = new DataTable();
+
+            String sql = "Select [Food].[Menu] AS 'Item Name', SUM([OrderMenu].[Quantity]*[OrderMenu].[Price]) AS 'Sales Price' from [dbo].[OrderMenu] INNER JOIN [Food] on [OrderMenu].FoodId = [Food].Id INNER JOIN [Order] on [Order].Id = [OrderMenu].OrderId where [Order].orderStateId = 5 and (DATEPART(yy, createdDt)) = " + datePart  + " GROUP BY [Food].[Menu]";
+
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["LoginConnectionString"].ConnectionString);
+            con.Open();
+            SqlCommand cmd = new SqlCommand(sql, con);
+
+            // create data adapter
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            // this will query your database and return the result to your datatable
+            da.Fill(data);
+            con.Close();
+            da.Dispose();
+
+            return data;
+        }
+
+        public DataTable getYearlyTotalSales()
+        {
+            DataTable data = new DataTable();
+
+            String sql = "Select SUM([OrderMenu].[Quantity]*[OrderMenu].[Price]) AS 'Total Price' from [dbo].[OrderMenu] INNER JOIN [Food] on [OrderMenu].FoodId = [Food].Id INNER JOIN [Order] on [Order].Id = [OrderMenu].OrderId where [Order].orderStateId = 5 and (DATEPART(yy, createdDt)) = " + datePart + " ";
+
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["LoginConnectionString"].ConnectionString);
+            con.Open();
+            SqlCommand cmd = new SqlCommand(sql, con);
+
+            // create data adapter
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            // this will query your database and return the result to your datatable
+            da.Fill(data);
+            con.Close();
+            da.Dispose();
+
+            return data;
         }
     }
 }

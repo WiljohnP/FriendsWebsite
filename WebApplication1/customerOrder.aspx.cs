@@ -19,8 +19,6 @@ namespace WebApplication1
                 {
                     dataBind();
                 }
-                //remove later
-                dataBind();
             }
         }
 
@@ -51,9 +49,6 @@ namespace WebApplication1
 
         protected void dataBind()
         {
-            //remove later
-            Session["uen"] = "UEN1";
-
             DataTable data = new DataTable();
 
             Controller.TableControl tb = new Controller.TableControl();
