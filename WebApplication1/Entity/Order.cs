@@ -372,12 +372,12 @@ namespace WebApplication1.Entity
 
             return data;
         }
-        
-        public DataTable getDailySales()
+
+        public DataTable getYearlySales()
         {
             DataTable data = new DataTable();
 
-            String sql = "Select * from [dbo].[Order] where foodid = " + foodId + " and orderid = " + orderId + " ";
+            String sql = "Select [Food].[Menu] AS 'Item Name', SUM([OrderMenu].[Quantity]*[OrderMenu].[Price]) AS 'Sales Price' from [dbo].[OrderMenu] INNER JOIN [Food] on [OrderMenu].FoodId = [Food].Id INNER JOIN [Order] on [Order].Id = [OrderMenu].OrderId where [Order].orderStateId = 5 and (DATEPART(yy, createdDt)) = " + datePart  + " GROUP BY [Food].[Menu]";
 
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["LoginConnectionString"].ConnectionString);
             con.Open();
@@ -393,11 +393,11 @@ namespace WebApplication1.Entity
             return data;
         }
 
-        public DataTable getYearlySales()
+        public DataTable getYearlyTotalSales()
         {
             DataTable data = new DataTable();
 
-            String sql = "Select [Food].[Menu] AS 'Item Name', [OrderMenu].[Quantity]*[OrderMenu].[Price] AS 'Sales Price' from [dbo].[OrderMenu] INNER JOIN [Food] on [OrderMenu].FoodId = [Food].Id INNER JOIN [Order] on [Order].Id = [OrderMenu].OrderId where [Order].orderStateId = 5 and (DATEPART(yy, createdDt)) = " + datePart  + " ";
+            String sql = "Select SUM([OrderMenu].[Quantity]*[OrderMenu].[Price]) AS 'Total Price' from [dbo].[OrderMenu] INNER JOIN [Food] on [OrderMenu].FoodId = [Food].Id INNER JOIN [Order] on [Order].Id = [OrderMenu].OrderId where [Order].orderStateId = 5 and (DATEPART(yy, createdDt)) = " + datePart + " ";
 
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["LoginConnectionString"].ConnectionString);
             con.Open();

@@ -136,5 +136,15 @@ namespace WebApplication1.Controller
             data = od.getYearlySales();
             return data;
         }
+
+        public DataTable getYearlyTotalSales(string datePart)
+        {
+            DataTable data;
+
+            Entity.Order od = new Entity.Order();
+            od.datePart = datePart;
+            data = od.getYearlyTotalSales();
+            return data;
+        }
     }
 }
