@@ -115,6 +115,28 @@
     <Content Include="C:\Users\Wiljohn\Desktop\drive-download-20220429T121913Z-001\dbo.Credentials.sql">
       <Link>App_Data\dbo.Credentials.sql</Link>
     </Content>
+    <Content Include="Content\bootstrap-5.0.2\css\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-5.0.2\css\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-5.0.2\css\bootstrap-grid.rtl.css" />
+    <Content Include="Content\bootstrap-5.0.2\css\bootstrap-grid.rtl.min.css" />
+    <Content Include="Content\bootstrap-5.0.2\css\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-5.0.2\css\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap-5.0.2\css\bootstrap-reboot.rtl.css" />
+    <Content Include="Content\bootstrap-5.0.2\css\bootstrap-reboot.rtl.min.css" />
+    <Content Include="Content\bootstrap-5.0.2\css\bootstrap-utilities.css" />
+    <Content Include="Content\bootstrap-5.0.2\css\bootstrap-utilities.min.css" />
+    <Content Include="Content\bootstrap-5.0.2\css\bootstrap-utilities.rtl.css" />
+    <Content Include="Content\bootstrap-5.0.2\css\bootstrap-utilities.rtl.min.css" />
+    <Content Include="Content\bootstrap-5.0.2\css\bootstrap.css" />
+    <Content Include="Content\bootstrap-5.0.2\css\bootstrap.min.css" />
+    <Content Include="Content\bootstrap-5.0.2\css\bootstrap.rtl.css" />
+    <Content Include="Content\bootstrap-5.0.2\css\bootstrap.rtl.min.css" />
+    <Content Include="Content\bootstrap-5.0.2\js\bootstrap.bundle.js" />
+    <Content Include="Content\bootstrap-5.0.2\js\bootstrap.bundle.min.js" />
+    <Content Include="Content\bootstrap-5.0.2\js\bootstrap.esm.js" />
+    <Content Include="Content\bootstrap-5.0.2\js\bootstrap.esm.min.js" />
+    <Content Include="Content\bootstrap-5.0.2\js\bootstrap.js" />
+    <Content Include="Content\bootstrap-5.0.2\js\bootstrap.min.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -138,6 +160,34 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Images\background.jpg" />
+    <Content Include="Content\bootstrap-5.0.2\css\bootstrap-grid.css.map" />
+    <Content Include="Content\bootstrap-5.0.2\css\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-5.0.2\css\bootstrap-grid.rtl.css.map" />
+    <Content Include="Content\bootstrap-5.0.2\css\bootstrap-grid.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-5.0.2\css\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-5.0.2\css\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-5.0.2\css\bootstrap-reboot.rtl.css.map" />
+    <Content Include="Content\bootstrap-5.0.2\css\bootstrap-reboot.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-5.0.2\css\bootstrap-utilities.css.map" />
+    <Content Include="Content\bootstrap-5.0.2\css\bootstrap-utilities.min.css.map" />
+    <Content Include="Content\bootstrap-5.0.2\css\bootstrap-utilities.rtl.css.map" />
+    <Content Include="Content\bootstrap-5.0.2\css\bootstrap-utilities.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-5.0.2\css\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-5.0.2\css\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap-5.0.2\css\bootstrap.rtl.css.map" />
+    <Content Include="Content\bootstrap-5.0.2\css\bootstrap.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-5.0.2\js\bootstrap.bundle.js.map" />
+    <Content Include="Content\bootstrap-5.0.2\js\bootstrap.bundle.min.js.map" />
+    <Content Include="Content\bootstrap-5.0.2\js\bootstrap.esm.js.map" />
+    <Content Include="Content\bootstrap-5.0.2\js\bootstrap.esm.min.js.map" />
+    <Content Include="Content\bootstrap-5.0.2\js\bootstrap.js.map" />
+    <Content Include="Content\bootstrap-5.0.2\js\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap-5.0.2\js\bootstrap.bundle.js.map" />
+    <Content Include="Scripts\bootstrap-5.0.2\js\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap-5.0.2\js\bootstrap.esm.js.map" />
+    <Content Include="Scripts\bootstrap-5.0.2\js\bootstrap.esm.min.js.map" />
+    <Content Include="Scripts\bootstrap-5.0.2\js\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap-5.0.2\js\bootstrap.min.js.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Images\customer.png" />
     <Content Include="Images\staff.png" />
@@ -148,6 +198,12 @@
     <Content Include="managerUser.aspx" />
     <Content Include="managerUserDetail.aspx" />
     <Content Include="Masterpage.Master.vb" />
+    <Content Include="Scripts\bootstrap-5.0.2\js\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap-5.0.2\js\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap-5.0.2\js\bootstrap.esm.js" />
+    <Content Include="Scripts\bootstrap-5.0.2\js\bootstrap.esm.min.js" />
+    <Content Include="Scripts\bootstrap-5.0.2\js\bootstrap.js" />
+    <Content Include="Scripts\bootstrap-5.0.2\js\bootstrap.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -176,6 +232,11 @@
     <Content Include="Scripts\WebForms\WebForms.js" />
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
+    <Content Include="StaffMenu.aspx" />
+    <Content Include="Staff\FullFillOrder.aspx" />
+    <Content Include="Staff\UpdateItemQuantity.aspx" />
+    <Content Include="Staff\ViewCustomerOrderDetails.aspx" />
+    <Content Include="Staff\ViewCustomerOrders.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
@@ -279,6 +340,52 @@
     <Compile Include="Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
     </Compile>
+    <Compile Include="StaffMenu.aspx.cs">
+      <DependentUpon>StaffMenu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="StaffMenu.aspx.designer.cs">
+      <DependentUpon>StaffMenu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Staff\FullFillOrder.aspx.cs">
+      <DependentUpon>FullFillOrder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Staff\FullFillOrder.aspx.designer.cs">
+      <DependentUpon>FullFillOrder.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Staff\Repository\FullFillOrder.cs" />
+    <Compile Include="Staff\Repository\UpdateItemQuantity.cs" />
+    <Compile Include="Staff\Repository\ViewCustomerOrderDetails.cs" />
+    <Compile Include="Staff\Repository\ViewCustomerOrders.cs" />
+    <Compile Include="Staff\StaffLayout.Master.cs">
+      <DependentUpon>StaffLayout.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Staff\StaffLayout.Master.designer.cs">
+      <DependentUpon>StaffLayout.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Staff\UpdateItemQuantity.aspx.cs">
+      <DependentUpon>UpdateItemQuantity.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Staff\UpdateItemQuantity.aspx.designer.cs">
+      <DependentUpon>UpdateItemQuantity.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Staff\ViewCustomerOrderDetails.aspx.cs">
+      <DependentUpon>ViewCustomerOrderDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Staff\ViewCustomerOrderDetails.aspx.designer.cs">
+      <DependentUpon>ViewCustomerOrderDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Staff\ViewCustomerOrders.aspx.cs">
+      <DependentUpon>ViewCustomerOrders.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Staff\ViewCustomerOrders.aspx.designer.cs">
+      <DependentUpon>ViewCustomerOrders.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -295,6 +402,7 @@
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
     <Content Include="Site.Master" />
+    <Content Include="Staff\StaffLayout.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -68,11 +68,11 @@ namespace WebApplication1
                     sb.Append("</script>");
                     ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", sb.ToString());
                     dataBind();
-                    lblError.Text = "";
+                    //lblError.Text = "";
                 }
                 else
                 {
-                    lblError.Text = "Delete Error!!!";
+                    //lblError.Text = "Delete Error!!!";
                 }
             }
         }
