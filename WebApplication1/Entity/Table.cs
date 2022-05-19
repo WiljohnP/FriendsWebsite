@@ -32,5 +32,34 @@ namespace WebApplication1.Entity
 
             return data;
         }
+
+        public bool CheckUENExists()
+        {
+            bool isValid = false;
+
+            String sql = "SELECT count(*) FROM [dbo].[Table] WHERE uen= '"+uen+"'";
+            
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["LoginConnectionString"].ConnectionString);
+            con.Open();
+            SqlCommand cmd = new SqlCommand(sql, con);
+
+            try
+            {
+                Int32.TryParse(cmd.ExecuteScalar().ToString(), out int executedInt);
+                if (executedInt == 1)
+                {
+                    isValid = true;
+                }
+                return isValid;
+            }
+            catch (Exception Ex)
+            {
+                return isValid;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
     }
 }

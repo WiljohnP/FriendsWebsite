@@ -32,7 +32,7 @@ namespace WebApplication1
                 Session["Role"] = ret;
 
                 if ( ret == "manager" ) { Response.Redirect("managerMenu.aspx"); }
-                else if ( ret == "staff" ) { Response.Redirect("Staff/ViewCustomerOrders.aspx"); }
+                else if ( ret == "staff" ) { Response.Redirect("Staff.aspx"); }
                 else if ( ret == "owner" ) { Response.Redirect("Owner.aspx"); }
                 else if ( ret == "error" ) { Response.Write("<script>alert('ERROR!!!!!')</script>"); }
             }

@@ -118,5 +118,33 @@ namespace WebApplication1.Controller
             return updateSucccess;
         }
 
+        public DataTable getDistinctYear()
+        {
+            DataTable data;
+
+            Entity.Order od = new Entity.Order();
+            data = od.getDistinctYear();
+            return data;
+        }
+
+        public DataTable getYearlySales(string datePart)
+        {
+            DataTable data;
+
+            Entity.Order od = new Entity.Order();
+            od.datePart = datePart;
+            data = od.getYearlySales();
+            return data;
+        }
+
+        public DataTable getYearlyTotalSales(string datePart)
+        {
+            DataTable data;
+
+            Entity.Order od = new Entity.Order();
+            od.datePart = datePart;
+            data = od.getYearlyTotalSales();
+            return data;
+        }
     }
 }
