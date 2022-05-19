@@ -14,6 +14,13 @@ namespace WebApplication1
         SeriesChartType type = SeriesChartType.Pie;
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["New"] != null && Session["Role"].ToString() == "owner")
+            {
+            }
+            else
+            {
+                Response.Redirect("Login.aspx");
+            }
             if (!IsPostBack)
             {
                 DataTable data;
@@ -50,6 +57,7 @@ namespace WebApplication1
             Chart1.Legends[0].Enabled = true;
 
             string res = string.Join(Environment.NewLine, oc.getYearlyTotalSales(YearDDL.SelectedValue).Rows.OfType<DataRow>().Select(x => string.Join("", x.ItemArray)));
+            if (res == "") { res = "0.00"; }
             lblTotalPrice.Text = res;
         }
 
@@ -58,9 +66,5 @@ namespace WebApplication1
             Response.Redirect("ownerDailyStatistics.aspx");
         }
 
-        protected void btnWeekly_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("ownerWeeklyStatistics.aspx");
-        }
     }
 }

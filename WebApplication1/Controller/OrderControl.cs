@@ -146,5 +146,29 @@ namespace WebApplication1.Controller
             data = od.getYearlyTotalSales();
             return data;
         }
+
+        public DataTable getDailySales(string yyyyPart, string mmPart, string ddPart)
+        {
+            DataTable data;
+
+            Entity.Order od = new Entity.Order();
+            od.yyyyPart = yyyyPart;
+            od.mmPart = mmPart;
+            od.ddPart = ddPart;
+            data = od.getDailySales();
+            return data;
+        }
+
+        public DataTable getDailyTotalSales(string yyyyPart, string mmPart, string ddPart)
+        {
+            DataTable data;
+
+            Entity.Order od = new Entity.Order();
+            od.yyyyPart = yyyyPart;
+            od.mmPart = mmPart;
+            od.ddPart = ddPart;
+            data = od.getDailyTotalSales();
+            return data;
+        }
     }
 }

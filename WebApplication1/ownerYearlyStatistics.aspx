@@ -5,8 +5,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div align="center">
-        <asp:Button ID="btnDaily" runat="server" Text="Daily List" OnClick="btnDaily_Click" Width="25%"/>
-        <asp:Button ID="btnWeekly" runat="server" Text="Weekly List" OnClick="btnWeekly_Click" Width="25%"/>
+        <asp:Button ID="btnDaily" runat="server" Text="Daily Statistics" OnClick="btnDaily_Click" Width="25%"/>
     </div>
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <div>
@@ -29,7 +28,7 @@
                         </ChartAreas>
                     </asp:Chart>
                 <div align="center">
-                    <h3>Total Earnings: $ <asp:Label ID="lblTotalPrice" runat="server"></asp:Label></h3>
+                    <h3>Total Earnings: $ <asp:Label ID="lblTotalPrice" runat="server" Text="0.00"></asp:Label></h3>
                 </div>
                 </ContentTemplate>
         </asp:UpdatePanel>

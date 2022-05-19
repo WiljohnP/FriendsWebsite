@@ -22,6 +22,10 @@ namespace WebApplication1.Entity
         public double price;
 
         public string datePart;
+        public string yyyyPart;
+        public string mmPart;
+        public string ddPart;
+
 
         public DataTable getCartListExist()
         {
@@ -398,6 +402,46 @@ namespace WebApplication1.Entity
             DataTable data = new DataTable();
 
             String sql = "Select SUM([OrderMenu].[Quantity]*[OrderMenu].[Price]) AS 'Total Price' from [dbo].[OrderMenu] INNER JOIN [Food] on [OrderMenu].FoodId = [Food].Id INNER JOIN [Order] on [Order].Id = [OrderMenu].OrderId where [Order].orderStateId = 5 and (DATEPART(yy, createdDt)) = " + datePart + " ";
+
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["LoginConnectionString"].ConnectionString);
+            con.Open();
+            SqlCommand cmd = new SqlCommand(sql, con);
+
+            // create data adapter
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            // this will query your database and return the result to your datatable
+            da.Fill(data);
+            con.Close();
+            da.Dispose();
+
+            return data;
+        }
+
+        public DataTable getDailySales()
+        {
+            DataTable data = new DataTable();
+
+            String sql = "select [Food].[Menu] AS 'Item Name', SUM([OrderMenu].[Quantity]*[OrderMenu].[Price]) AS 'Sales Price' from [dbo].[OrderMenu] INNER JOIN [Food] on [OrderMenu].FoodId = [Food].Id INNER JOIN [Order] on [Order].Id = [OrderMenu].OrderId where (DATEPART(yy, createdDt) = " + yyyyPart + " AND DATEPART(mm, createdDt) = " + mmPart + " AND DATEPART(dd, createdDt) = " + ddPart + ") GROUP BY [Food].[Menu]";
+
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["LoginConnectionString"].ConnectionString);
+            con.Open();
+            SqlCommand cmd = new SqlCommand(sql, con);
+
+            // create data adapter
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            // this will query your database and return the result to your datatable
+            da.Fill(data);
+            con.Close();
+            da.Dispose();
+
+            return data;
+        }
+
+        public DataTable getDailyTotalSales()
+        {
+            DataTable data = new DataTable();
+
+            String sql = "Select SUM([OrderMenu].[Quantity]*[OrderMenu].[Price]) AS 'Total Price' from [dbo].[OrderMenu] INNER JOIN [Food] on [OrderMenu].FoodId = [Food].Id INNER JOIN [Order] on [Order].Id = [OrderMenu].OrderId where (DATEPART(yy, createdDt) = " + yyyyPart + " AND DATEPART(mm, createdDt) = " + mmPart + " AND DATEPART(dd, createdDt) = " + ddPart + ") ";
 
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["LoginConnectionString"].ConnectionString);
             con.Open();

@@ -149,6 +149,7 @@
     <Content Include="managerUser.aspx" />
     <Content Include="managerUserDetail.aspx" />
     <Content Include="Masterpage.Master.vb" />
+    <Content Include="ownerDailyStatistics.aspx" />
     <Content Include="ownerYearlyStatistics.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -272,6 +273,13 @@
     </Compile>
     <Compile Include="managerUserDetail.aspx.designer.cs">
       <DependentUpon>managerUserDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ownerDailyStatistics.aspx.cs">
+      <DependentUpon>ownerDailyStatistics.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ownerDailyStatistics.aspx.designer.cs">
+      <DependentUpon>ownerDailyStatistics.aspx</DependentUpon>
     </Compile>
     <Compile Include="ownerYearlyStatistics.aspx.cs">
       <DependentUpon>ownerYearlyStatistics.aspx</DependentUpon>
