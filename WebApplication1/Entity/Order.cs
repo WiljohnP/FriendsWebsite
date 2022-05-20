@@ -421,7 +421,7 @@ namespace WebApplication1.Entity
         {
             DataTable data = new DataTable();
 
-            String sql = "select [Food].[Menu] AS 'Item Name', SUM([OrderMenu].[Quantity]*[OrderMenu].[Price]) AS 'Sales Price' from [dbo].[OrderMenu] INNER JOIN [Food] on [OrderMenu].FoodId = [Food].Id INNER JOIN [Order] on [Order].Id = [OrderMenu].OrderId where (DATEPART(yy, createdDt) = " + yyyyPart + " AND DATEPART(mm, createdDt) = " + mmPart + " AND DATEPART(dd, createdDt) = " + ddPart + ") GROUP BY [Food].[Menu]";
+            String sql = "select [Food].[Menu] AS 'Item Name', SUM([OrderMenu].[Quantity]*[OrderMenu].[Price]) AS 'Sales Price' from [dbo].[OrderMenu] INNER JOIN [Food] on [OrderMenu].FoodId = [Food].Id INNER JOIN [Order] on [Order].Id = [OrderMenu].OrderId where [Order].orderStateId = 5 and (DATEPART(yy, createdDt) = " + yyyyPart + " AND DATEPART(mm, createdDt) = " + mmPart + " AND DATEPART(dd, createdDt) = " + ddPart + ") GROUP BY [Food].[Menu]";
 
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["LoginConnectionString"].ConnectionString);
             con.Open();
@@ -441,7 +441,7 @@ namespace WebApplication1.Entity
         {
             DataTable data = new DataTable();
 
-            String sql = "Select SUM([OrderMenu].[Quantity]*[OrderMenu].[Price]) AS 'Total Price' from [dbo].[OrderMenu] INNER JOIN [Food] on [OrderMenu].FoodId = [Food].Id INNER JOIN [Order] on [Order].Id = [OrderMenu].OrderId where (DATEPART(yy, createdDt) = " + yyyyPart + " AND DATEPART(mm, createdDt) = " + mmPart + " AND DATEPART(dd, createdDt) = " + ddPart + ") ";
+            String sql = "Select SUM([OrderMenu].[Quantity]*[OrderMenu].[Price]) AS 'Total Price' from [dbo].[OrderMenu] INNER JOIN [Food] on [OrderMenu].FoodId = [Food].Id INNER JOIN [Order] on [Order].Id = [OrderMenu].OrderId where [Order].orderStateId = 5 and (DATEPART(yy, createdDt) = " + yyyyPart + " AND DATEPART(mm, createdDt) = " + mmPart + " AND DATEPART(dd, createdDt) = " + ddPart + ") ";
 
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["LoginConnectionString"].ConnectionString);
             con.Open();
