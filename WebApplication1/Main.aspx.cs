@@ -24,6 +24,7 @@ namespace WebApplication1
         {
             Session["type"] = "staff";
             Response.Redirect("Login.aspx");
+
         }
     }
 }
