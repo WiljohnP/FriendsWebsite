@@ -169,6 +169,7 @@ namespace WebApplication1.Entity
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             // this will query your database and return the result to your datatable
             da.Fill(data);
+   
             con.Close();
             da.Dispose();
 
@@ -305,7 +306,7 @@ namespace WebApplication1.Entity
 
                 bool deleteSuccess = deleteCart();
 
-                if (deleteSuccess = true)
+                if (deleteSuccess == true)
                 {
                     return true;
                 }
@@ -421,7 +422,7 @@ namespace WebApplication1.Entity
         {
             DataTable data = new DataTable();
 
-            String sql = "select [Food].[Menu] AS 'Item Name', SUM([OrderMenu].[Quantity]*[OrderMenu].[Price]) AS 'Sales Price' from [dbo].[OrderMenu] INNER JOIN [Food] on [OrderMenu].FoodId = [Food].Id INNER JOIN [Order] on [Order].Id = [OrderMenu].OrderId where (DATEPART(yy, createdDt) = " + yyyyPart + " AND DATEPART(mm, createdDt) = " + mmPart + " AND DATEPART(dd, createdDt) = " + ddPart + ") GROUP BY [Food].[Menu]";
+            String sql = "select [Food].[Menu] AS 'Item Name', SUM([OrderMenu].[Quantity]*[OrderMenu].[Price]) AS 'Sales Price' from [dbo].[OrderMenu] INNER JOIN [Food] on [OrderMenu].FoodId = [Food].Id INNER JOIN [Order] on [Order].Id = [OrderMenu].OrderId where [Order].orderStateId = 5 and (DATEPART(yy, createdDt) = " + yyyyPart + " AND DATEPART(mm, createdDt) = " + mmPart + " AND DATEPART(dd, createdDt) = " + ddPart + ") GROUP BY [Food].[Menu]";
 
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["LoginConnectionString"].ConnectionString);
             con.Open();
@@ -441,7 +442,7 @@ namespace WebApplication1.Entity
         {
             DataTable data = new DataTable();
 
-            String sql = "Select SUM([OrderMenu].[Quantity]*[OrderMenu].[Price]) AS 'Total Price' from [dbo].[OrderMenu] INNER JOIN [Food] on [OrderMenu].FoodId = [Food].Id INNER JOIN [Order] on [Order].Id = [OrderMenu].OrderId where (DATEPART(yy, createdDt) = " + yyyyPart + " AND DATEPART(mm, createdDt) = " + mmPart + " AND DATEPART(dd, createdDt) = " + ddPart + ") ";
+            String sql = "Select SUM([OrderMenu].[Quantity]*[OrderMenu].[Price]) AS 'Total Price' from [dbo].[OrderMenu] INNER JOIN [Food] on [OrderMenu].FoodId = [Food].Id INNER JOIN [Order] on [Order].Id = [OrderMenu].OrderId where [Order].orderStateId = 5 and (DATEPART(yy, createdDt) = " + yyyyPart + " AND DATEPART(mm, createdDt) = " + mmPart + " AND DATEPART(dd, createdDt) = " + ddPart + ") ";
 
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["LoginConnectionString"].ConnectionString);
             con.Open();
@@ -456,5 +457,314 @@ namespace WebApplication1.Entity
 
             return data;
         }
+
+
+        //Staff Portion
+        /*=============Full Fill Order============*/
+        //GET Order States list for dropdown
+        public static DataTable getOrderStates()
+        {
+            DataTable data = new DataTable();
+
+            string constr = ConfigurationManager.ConnectionStrings["LoginConnectionString"].ConnectionString;
+
+            String query = "Select Id,OrderState from OrderState";
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                using (SqlDataAdapter sda = new SqlDataAdapter(query, con))
+                {
+                    using (DataTable dt = new DataTable())
+                    {
+                        sda.Fill(dt);
+                        con.Close();
+                        sda.Dispose();
+                        return dt;
+
+                    }
+                }
+            }
+        }
+
+
+        //FullFill Customer Order
+        public static bool fullFillCustomerOrder(int orderId, int orderStateId)
+        {
+            bool confirm = false;
+            string constr = ConfigurationManager.ConnectionStrings["LoginConnectionString"].ConnectionString;
+            using (SqlConnection connection = new SqlConnection(constr))
+            {
+                string sqlUpdateOrderTable = "Update [dbo].[Order] Set orderStateId =@orderStateId, modifiedDt=@modifiedDt Where Id =@OrderId";
+
+                using (SqlCommand cmdOrder = new SqlCommand(sqlUpdateOrderTable, connection))
+                {
+                    connection.Open();
+                    cmdOrder.Parameters.AddWithValue("@OrderId", orderId);
+                    cmdOrder.Parameters.AddWithValue("@orderStateId", orderStateId);
+                    cmdOrder.Parameters.AddWithValue("@modifiedDt", DateTime.Now.ToString());
+
+                    if (cmdOrder.ExecuteNonQuery() > 0)
+                    {
+                        cmdOrder.Dispose();
+                        string sqlUpdateOrderMenuTable = "Update [dbo].[OrderMenu] Set OrderStateId =@OrderStateId Where OrderId =@OrderId";
+                        using (SqlCommand cmdOrderMenu = new SqlCommand(sqlUpdateOrderMenuTable, connection))
+                        {
+                            cmdOrderMenu.Parameters.AddWithValue("@OrderId", orderId);
+                            cmdOrderMenu.Parameters.AddWithValue("@OrderStateId", orderStateId);
+                            if (cmdOrderMenu.ExecuteNonQuery() > 0)
+                            {
+                                confirm = true;
+                                cmdOrderMenu.Dispose();
+                                connection.Close();
+                            }
+
+                        }
+
+                    }
+
+                }
+            }
+            return confirm;
+        }
+
+
+        //Get Selected Order State
+        public static string getSelectedOrderStateId(int OrderId)
+        {
+            string constr = ConfigurationManager.ConnectionStrings["LoginConnectionString"].ConnectionString;
+            var selectedOrderStateId = "";
+            using (SqlConnection connection = new SqlConnection(constr))
+            {
+                string sql = "Select orderStateId from [dbo].[Order] where Id=@OrderId";
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    connection.Open();
+                    command.Parameters.AddWithValue("@OrderId", OrderId);
+                    SqlDataReader rdr = command.ExecuteReader();
+                    if (rdr.HasRows)
+                    {
+                        while (rdr.Read())
+                        {
+                            selectedOrderStateId = rdr[0].ToString();
+                        }
+
+
+                    }
+                    rdr.Close();
+                    command.Dispose();
+                    connection.Close();
+
+                }
+
+                return selectedOrderStateId;
+            }
+
+        }
+
+
+        /*================View Customer Orders=================*/
+
+        //Get Customer Orders
+        public static DataTable getCustomerOrders()
+        {
+            DataTable data = new DataTable();
+
+            string constr = ConfigurationManager.ConnectionStrings["LoginConnectionString"].ConnectionString;
+
+            String query = " Select [dbo].[Order].Id as OrderId,[dbo].[OrderMenu].Id as OrderMenuId, [dbo].[Table].uen, [dbo].[Food].category, [dbo].[Food].menu,[dbo].[Food].path,[dbo].[Food].price,[dbo].[Order].createdDt,[dbo].[Order].modifiedDt,[dbo].[OrderMenu].Quantity,[dbo].[OrderState].orderState FROM [dbo].[Order] inner join  [dbo].[Table] on [dbo].[Order].tableId=[dbo].[Table].Id inner join  [dbo].[OrderMenu] on [dbo].[Order].Id=[dbo].[OrderMenu].OrderId inner join [dbo].[OrderState] on [dbo].[OrderMenu].OrderStateId=[dbo].[OrderState].Id inner join Food on[dbo].[OrderMenu].FoodId=[dbo].[Food].Id";
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                using (SqlDataAdapter sda = new SqlDataAdapter(query, con))
+                {
+                    using (DataTable dt = new DataTable())
+                    {
+                        sda.Fill(dt);
+                        return dt;
+                    }
+                }
+            }
+        }
+        //Delete Customer Menu Order Item
+        public static bool DeleteCustomerMenuOrderItem(int OrderMenuId)
+        {
+            bool confirm = false;
+            int orderId=0;
+            string constr = ConfigurationManager.ConnectionStrings["LoginConnectionString"].ConnectionString;
+            using (SqlConnection connection = new SqlConnection(constr))
+            {
+                string getOrderIdSql = "Select OrderId from [dbo].[OrderMenu]  Where Id=@OrderMenuId";
+                SqlCommand cmdGetOrderId = new SqlCommand(getOrderIdSql, connection);
+                cmdGetOrderId.Parameters.AddWithValue("@OrderMenuId", OrderMenuId);
+                connection.Open();
+                SqlDataReader rdrCheckOrderId = cmdGetOrderId.ExecuteReader();
+                while (rdrCheckOrderId.Read())
+                {
+                    orderId = Int32.Parse(rdrCheckOrderId[0].ToString());
+                    break;
+                }
+                cmdGetOrderId.Dispose();
+                rdrCheckOrderId.Close();
+
+                //DELETE FROM ORDER MENU TABLE
+                string deleteOrderMenuSQL = "Delete From [dbo].[OrderMenu] Where Id=@OrderMenuId";
+                using (SqlCommand cmdOrderMenu = new SqlCommand())
+                {
+                    cmdOrderMenu.CommandText = deleteOrderMenuSQL;
+                    cmdOrderMenu.CommandType = CommandType.Text;
+                    cmdOrderMenu.Connection = connection;
+                    cmdOrderMenu.Parameters.AddWithValue("@OrderMenuId", OrderMenuId);
+                    if (cmdOrderMenu.ExecuteNonQuery() > 0)
+                    {
+                        String checkOrderId = "SELECT COUNT(*) FROM [dbo].[OrderMenu] where OrderId=@orderId";
+                        using (SqlCommand cmdCheckOrderId = new SqlCommand(checkOrderId, connection))
+                        {
+                            cmdCheckOrderId.Parameters.AddWithValue("@OrderId", orderId);
+                            int count = (int)cmdCheckOrderId.ExecuteScalar();
+                            if (count==0)
+                            {
+                                string deleteOrderSql = "Delete From [dbo].[Order] Where Id=@OrderId";
+                                using (SqlCommand cmdOrder = new SqlCommand(deleteOrderSql, connection))
+                                {
+                                    cmdOrder.Parameters.AddWithValue("@OrderId", orderId);
+                                    cmdOrder.ExecuteNonQuery();
+                                    cmdOrder.Dispose();
+                                }
+                            }
+                        }
+
+                        confirm = true;
+                    }
+                    connection.Close();
+                }
+                return confirm;
+            }
+
+        }
+
+
+        //Get Selected Product Order Quantity
+        public static string getSelectedQuantity(int OrderMenuId)
+        {
+            string constr = ConfigurationManager.ConnectionStrings["LoginConnectionString"].ConnectionString;
+            var selectedOrderStateId = "";
+            using (SqlConnection connection = new SqlConnection(constr))
+            {
+                string sql = "Select Quantity from [dbo].[OrderMenu] where Id=@OrderMenuId";
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    connection.Open();
+                    command.Parameters.AddWithValue("@OrderMenuId", OrderMenuId);
+                    SqlDataReader rdr = command.ExecuteReader();
+                    if (rdr.HasRows)
+                    {
+                        while (rdr.Read())
+                        {
+                            selectedOrderStateId = rdr[0].ToString();
+                        }
+                    }
+
+                    rdr.Close();
+                    command.Dispose();
+                    connection.Close();
+
+
+                }
+
+                return selectedOrderStateId;
+            }
+
+        }
+
+        //Update quantity for specfic product
+        public static bool updateItemQuantity(int orderMenuId, int quantity)
+        {
+            bool confirm = false;
+            string constr = ConfigurationManager.ConnectionStrings["LoginConnectionString"].ConnectionString;
+            using (SqlConnection connection = new SqlConnection(constr))
+            {
+                string sqlUpdateOrderTable = "Update [dbo].[OrderMenu] Set Quantity=@ItemQuantity Where Id =@OrderMenuId";
+
+                using (SqlCommand cmdOrder = new SqlCommand(sqlUpdateOrderTable, connection))
+                {
+                    connection.Open();
+                    cmdOrder.Parameters.AddWithValue("@OrderMenuId", orderMenuId);
+                    cmdOrder.Parameters.AddWithValue("@ItemQuantity", quantity);
+
+                    if (cmdOrder.ExecuteNonQuery() > 0)
+                    {
+                        confirm = true;
+                    }
+                    cmdOrder.Dispose();
+                    connection.Close();
+
+                }
+            }
+            return confirm;
+        }
+
+
+
+        /*================View Customer Orders Details=================*/
+        public class ClassGetCustomerOrderDetails
+        {
+            public string OrderId { get; set; }
+            public string OrderMenuId { get; set; }
+            public string UEN { get; set; }
+            public string Category { get; set; }
+            public string Menu { get; set; }
+            public string ImagePath { get; set; }
+            public string Price { get; set; }
+            public string CreatedDate { get; set; }
+            public string ModifiedDate { get; set; }
+            public string Quantity { get; set; }
+            public string OrderState { get; set; }
+        }
+
+        //Get Customer Order Details
+        public static ClassGetCustomerOrderDetails getCustomerOrderDetails(int OrderId)
+        {
+
+            ClassGetCustomerOrderDetails customerOrderDetails = null;
+            string constr = ConfigurationManager.ConnectionStrings["LoginConnectionString"].ConnectionString;
+            using (SqlConnection connection = new SqlConnection(constr))
+            {
+
+                String query = "  Select [dbo].[Order].Id as OrderId,[dbo].[OrderMenu].Id as OrderMenuId, [dbo].[Table].uen, [dbo].[Food].category, [dbo].[Food].menu,[dbo].[Food].path,[dbo].[Food].price,[dbo].[Order].createdDt,[dbo].[Order].modifiedDt,[dbo].[OrderMenu].Quantity,[dbo].[OrderState].orderState FROM [dbo].[Order] inner join  [dbo].[Table] on [dbo].[Order].tableId=[dbo].[Table].Id inner join  [dbo].[OrderMenu] on [dbo].[Order].Id=[dbo].[OrderMenu].OrderId inner join [dbo].[OrderState] on [dbo].[OrderMenu].OrderStateId=[dbo].[OrderState].Id inner join Food on[dbo].[OrderMenu].FoodId=[dbo].[Food].Id Where [dbo].[Order].Id=@OrderId";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    connection.Open();
+                    command.Parameters.AddWithValue("@OrderId", OrderId);
+                    SqlDataReader rdr = command.ExecuteReader();
+                    if (rdr.HasRows)
+                    {
+                        while (rdr.Read())
+                        {
+                            customerOrderDetails = new ClassGetCustomerOrderDetails()
+                            {
+                                OrderId = rdr.GetValue(0).ToString(),
+                                OrderMenuId = rdr.GetValue(1).ToString(),
+                                UEN = rdr.GetValue(2).ToString(),
+                                Category = rdr.GetValue(3).ToString(),
+                                Menu = rdr.GetValue(4).ToString(),
+                                ImagePath = rdr.GetValue(5).ToString(),
+                                Price = rdr.GetValue(6).ToString(),
+                                CreatedDate = rdr.GetValue(7).ToString(),
+                                ModifiedDate = rdr.GetValue(8).ToString(),
+                                Quantity = rdr.GetValue(9).ToString(),
+                                OrderState = rdr.GetValue(10).ToString()
+                            };
+                        }
+
+
+                    }
+                    rdr.Close();
+                    command.Dispose();
+                    connection.Close();
+
+                }
+
+                return customerOrderDetails;
+            }
+        }
+
     }
 }

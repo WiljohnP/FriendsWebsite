@@ -15,7 +15,7 @@ namespace WebApplication1.Staff
             {
                 if (!this.IsPostBack)
                 {
-                    var result = Staff.Repository.ViewCustomerOrders.getCustomerOrders();
+                    var result = Controller.OrderControl.getCustomerOrders();
                     gvCustomerOrders.DataSource = result;
                     gvCustomerOrders.DataBind();
                 }
@@ -45,10 +45,10 @@ namespace WebApplication1.Staff
             if (e.CommandName == "deleteOrder")
             {
                 int OrderMenuId = Convert.ToInt32(e.CommandArgument.ToString());
-                bool confirm= Staff.Repository.ViewCustomerOrders.DeleteCustomerMenuOrderItem(OrderMenuId);
+                bool confirm = Controller.OrderControl.DeleteCustomerMenuOrderItem(OrderMenuId);
                 if (confirm)
                 {
-                    gvCustomerOrders.DataSource = Staff.Repository.ViewCustomerOrders.getCustomerOrders();
+                    gvCustomerOrders.DataSource = Controller.OrderControl.getCustomerOrders();
                     gvCustomerOrders.DataBind();
                 }
             }

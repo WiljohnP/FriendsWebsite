@@ -16,7 +16,7 @@ namespace WebApplication1.Staff
                 if (!this.IsPostBack)
                 {
                     string orderMenuId = Request.QueryString["OrderMenuId"];
-                    string selectedQuantity = Staff.Repository.UpdateItemQuantity.getSelectedQuantity(Int32.Parse(orderMenuId));
+                    string selectedQuantity = Controller.OrderControl.getSelectedQuantity(Int32.Parse(orderMenuId));
                     txtItemQuantity.Text = selectedQuantity;
 
                 }
@@ -36,7 +36,7 @@ namespace WebApplication1.Staff
             string orderMenuId = Request.QueryString["OrderMenuId"];
             if (orderMenuId != null)
             {
-                bool confirm = Staff.Repository.UpdateItemQuantity.updateItemQuantity(Int32.Parse(orderMenuId),Int32.Parse(txtItemQuantity.Text));
+                bool confirm = Controller.OrderControl.updateItemQuantity(Int32.Parse(orderMenuId),Int32.Parse(txtItemQuantity.Text));
                 if (confirm)
                 {
                     lblFullfillOrderMessage.Text = "Quantity has been updated successfully";
