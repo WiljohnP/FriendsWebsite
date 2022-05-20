@@ -127,6 +127,16 @@ namespace WebApplication1.Controller
             return data;
         }
 
+        public DataTable getDistinctMonthFromYear(string yyyyPart)
+        {
+            DataTable data;
+
+            Entity.Order od = new Entity.Order();
+            od.yyyyPart = yyyyPart;
+            data = od.getDistinctMonthFromYear();
+            return data;
+        }
+
         public DataTable getYearlySales(string datePart)
         {
             DataTable data;
@@ -168,6 +178,28 @@ namespace WebApplication1.Controller
             od.mmPart = mmPart;
             od.ddPart = ddPart;
             data = od.getDailyTotalSales();
+            return data;
+        }
+
+        public DataTable getMonthlySales(string yyyyPart, string mmPart)
+        {
+            DataTable data;
+
+            Entity.Order od = new Entity.Order();
+            od.yyyyPart = yyyyPart;
+            od.mmPart = mmPart;
+            data = od.getMonthlySales();
+            return data;
+        }
+
+        public DataTable getMonthlyTotalSales(string yyyyPart, string mmPart)
+        {
+            DataTable data;
+
+            Entity.Order od = new Entity.Order();
+            od.yyyyPart = yyyyPart;
+            od.mmPart = mmPart;
+            data = od.getMonthlyTotalSales();
             return data;
         }
     }

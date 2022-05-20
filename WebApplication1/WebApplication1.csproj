@@ -183,6 +183,7 @@
     <Content Include="Content\bootstrap-5.0.2\js\bootstrap.esm.min.js.map" />
     <Content Include="Content\bootstrap-5.0.2\js\bootstrap.js.map" />
     <Content Include="Content\bootstrap-5.0.2\js\bootstrap.min.js.map" />
+    <Content Include="ownerMonthlyStatistics.aspx" />
     <Content Include="ownerDailyStatistics.aspx" />
     <Content Include="Scripts\bootstrap-5.0.2\js\bootstrap.bundle.js.map" />
     <Content Include="Scripts\bootstrap-5.0.2\js\bootstrap.bundle.min.js.map" />
@@ -328,6 +329,13 @@
     </Compile>
     <Compile Include="managerUserDetail.aspx.designer.cs">
       <DependentUpon>managerUserDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ownerMonthlyStatistics.aspx.cs">
+      <DependentUpon>ownerMonthlyStatistics.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ownerMonthlyStatistics.aspx.designer.cs">
+      <DependentUpon>ownerMonthlyStatistics.aspx</DependentUpon>
     </Compile>
     <Compile Include="ownerDailyStatistics.aspx.cs">
       <DependentUpon>ownerDailyStatistics.aspx</DependentUpon>
