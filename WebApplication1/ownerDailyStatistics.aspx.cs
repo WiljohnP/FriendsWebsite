@@ -62,5 +62,10 @@ namespace WebApplication1
         {
             Response.Redirect("ownerYearlyStatistics.aspx");
         }
+
+        protected void btnMonthly_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("ownerMonthlyStatistics.aspx");
+        }
     }
 }

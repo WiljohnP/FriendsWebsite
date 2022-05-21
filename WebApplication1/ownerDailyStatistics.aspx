@@ -6,6 +6,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div align="center">
         <asp:Button ID="btnYearly" runat="server" Text="Yearly Statistics" OnClick="btnYearly_Click" Width="25%"/>
+        <asp:Button ID="btnMonthly" runat="server" Text="Monthly Statistics" OnClick="btnMonthly_Click" Width="25%"/>
     </div>
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <div>
