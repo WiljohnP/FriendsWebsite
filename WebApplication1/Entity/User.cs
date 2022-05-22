@@ -41,7 +41,9 @@ namespace WebApplication1.Entity
         public int checkUser(string tb1)
         {
             //checks for user in database by counting number of user with inputted username. the valid answer can only be 1.
-            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["LoginConnectionString"].ConnectionString);
+            string cs = ConfigurationManager.ConnectionStrings["LoginConnectionString"].ConnectionString;
+            SqlConnection con = new SqlConnection(cs);
+
             con.Open();
             string query_user = "SELECT count(*) FROM [dbo].[User] WHERE Username='" + tb1 + "'";
             SqlCommand user_com = new SqlCommand(query_user, con);
