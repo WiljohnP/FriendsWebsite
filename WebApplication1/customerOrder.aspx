@@ -10,7 +10,7 @@
             <Columns>
                 <asp:TemplateField ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="40%" HeaderText="Menu">
                     <ItemTemplate>
-                        <div style="display:inline-grid;text-align:center;width:150px;height:150px;" >
+                        <div style="display:inline-grid;text-align:center;width:250px;height:150px;" >
 								<center><asp:Image runat="server" ID="imgRest" Width="130px" Height="130px" ImageUrl='<%#Eval("path") %>' />
 									 </center>
 								<asp:Label runat="server" ID="lblMenu" Text='<%#Eval("menu") %>'></asp:Label>
