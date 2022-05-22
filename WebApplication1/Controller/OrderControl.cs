@@ -127,6 +127,16 @@ namespace WebApplication1.Controller
             return data;
         }
 
+        public DataTable getDistinctMonthFromYear(string yyyyPart)
+        {
+            DataTable data;
+
+            Entity.Order od = new Entity.Order();
+            od.yyyyPart = yyyyPart;
+            data = od.getDistinctMonthFromYear();
+            return data;
+        }
+
         public DataTable getYearlySales(string datePart)
         {
             DataTable data;
@@ -171,57 +181,26 @@ namespace WebApplication1.Controller
             return data;
         }
 
-
-        //Staff Portion
-        //GET Order States list for dropdown
-
-        public static DataTable getOrderStates()
+        public DataTable getMonthlySales(string yyyyPart, string mmPart)
         {
-            return Entity.Order.getOrderStates();
-        }
-        //FullFill Customer Order
-        public static bool fullFillCustomerOrder(int orderId, int orderStateId)
-        {
-            return Entity.Order.fullFillCustomerOrder(orderId, orderStateId);
+            DataTable data;
+
+            Entity.Order od = new Entity.Order();
+            od.yyyyPart = yyyyPart;
+            od.mmPart = mmPart;
+            data = od.getMonthlySales();
+            return data;
         }
 
-        //Get Selected Order State
-        public static string getSelectedOrderStateId(int orderId)
+        public DataTable getMonthlyTotalSales(string yyyyPart, string mmPart)
         {
-            return Entity.Order.getSelectedOrderStateId(orderId);
+            DataTable data;
+
+            Entity.Order od = new Entity.Order();
+            od.yyyyPart = yyyyPart;
+            od.mmPart = mmPart;
+            data = od.getMonthlyTotalSales();
+            return data;
         }
-
-
-        /*================View Customer Orders=================*/
-
-        //Get Customer Orders
-        public static DataTable getCustomerOrders()
-        {
-            return Entity.Order.getCustomerOrders();
-        }
-
-        //Delete Customer Menu Order Item
-        public static bool DeleteCustomerMenuOrderItem(int orderMenuId)
-        {
-            return Entity.Order.DeleteCustomerMenuOrderItem(orderMenuId);
-        }
-
-        //Get Selected Product Order Quantity
-        public static string getSelectedQuantity(int orderMenuId)
-        {
-            return Entity.Order.getSelectedQuantity(orderMenuId);
-        }
-        //Update quantity for specfic product
-        public static bool updateItemQuantity(int orderMenuId, int quantity)
-        {
-            return Entity.Order.updateItemQuantity(orderMenuId, quantity);
-        }
-
-        //Get Customer Order Details
-        public static Entity.Order.ClassGetCustomerOrderDetails getCustomerOrderDetails(int orderId)
-        {
-            return Entity.Order.getCustomerOrderDetails(orderId);
-        }
-
-     }
- }
+    }
+}
