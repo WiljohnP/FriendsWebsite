@@ -31,4 +31,9 @@ jobs:
         
       - name: Build Solution
         run: msbuild WebApplication1.sln
+        
+      # Execute all unit tests in the solution
+      - name: Execute unit tests
+        run: dotnet test
+
       
