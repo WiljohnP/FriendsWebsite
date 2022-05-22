@@ -34,7 +34,7 @@ jobs:
       
       # Testing
       - name: Run UnitTests
-        run: vstest.console.exe NUnitTest\bin\Debug\NUnitTest.dll
+        run: vstest.console NUnitTest\bin\Debug\NUnitTest.dll
       
       
       
