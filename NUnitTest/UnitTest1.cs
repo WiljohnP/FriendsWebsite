@@ -7,8 +7,7 @@ namespace NUnitTest
     [TestClass]
     public class UnitTest1
     {
-        
-        /*[TestMethod]
+        [TestMethod]
         public void Test_hashPlaintext()
         {
             //ARRANGE
@@ -22,31 +21,31 @@ namespace NUnitTest
 
         }
 
-        [TestMethod]
-        public void Test_isUserExists()
-        {
-            //ARRANGE
-            UserControl uc = new UserControl();
+        //[TestMethod]
+        //public void Test_isUserExists()
+        //{
+        //    //ARRANGE
+        //    UserControl uc = new UserControl();
 
-            //ACT
-            bool result = uc.isUserExists("manager");
+        //    //ACT
+        //    bool result = uc.isUserExists("manager");
 
-            //ASSERT
-            Assert.AreEqual(true, result);
-        }*/
+        //    //ASSERT
+        //    Assert.AreEqual(true, result);
+        //}
 
-        [TestMethod]
-        public void Test_validatePassword()
-        {
-            //ARRANGE
-            UserControl uc = new UserControl();
+        //[TestMethod]
+        //public void Test_validatePassword()
+        //{
+        //    //ARRANGE
+        //    UserControl uc = new UserControl();
 
-            //ACT
-            string result = uc.validatePassword("staff","not-staff-password");
+        //    //ACT
+        //    string result = uc.validatePassword("staff","not-staff-password");
 
-            //ASSERT
-            Assert.AreEqual("wrong password", result);
+        //    //ASSERT
+        //    Assert.AreEqual("wrong password", result);
 
-        }
+        //}
     }
 }
