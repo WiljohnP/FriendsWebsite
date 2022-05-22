@@ -33,7 +33,7 @@ jobs:
         run: msbuild WebApplication1.sln
         
       # Testing
-      - name: Install NUnit.ConsoleRunner
+      - name: Install Unit Test
         run: Install-Package Microsoft.VisualStudio.TestPlatform -Version 14.0.0
       - name: Run UnitTests
         run: dotnet test
