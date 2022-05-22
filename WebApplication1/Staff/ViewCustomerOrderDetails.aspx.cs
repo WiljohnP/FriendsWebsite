@@ -14,7 +14,7 @@ namespace WebApplication1.Staff
             if (Session["role"]!= null)
             {
                 int OrderId = Int32.Parse(Request.QueryString["OrderId"]);
-                Staff.Repository.ViewCustomerOrderDetails.GetCustomerOrderDetails details = Staff.Repository.ViewCustomerOrderDetails.getCustomerOrderDetails(OrderId);
+                Entity.Order.ClassGetCustomerOrderDetails details = Controller.OrderControl.getCustomerOrderDetails(OrderId);
                 if (details != null)
                 {
                     lblOrderId.Text = details.OrderId;

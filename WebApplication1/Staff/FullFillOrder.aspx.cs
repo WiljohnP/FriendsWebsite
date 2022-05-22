@@ -17,7 +17,7 @@ namespace WebApplication1.Staff
                 var orderStateId = "";
                 if (!this.IsPostBack)
                 {
-                    var result = Staff.Repository.FullFillOrder.getOrderStates();
+                    var result = Controller.OrderControl.getOrderStates();
                     ddlOrderState.DataSource = result;
                     ddlOrderState.DataValueField = "Id";
                     ddlOrderState.DataTextField = "orderState";
@@ -25,7 +25,7 @@ namespace WebApplication1.Staff
                     string orderId = Request.QueryString["OrderId"];
                     if (orderId != null)
                     {
-                        orderStateId = Staff.Repository.FullFillOrder.getSelectedOrderStateId(Int32.Parse(orderId));
+                        orderStateId = Controller.OrderControl.getSelectedOrderStateId(Int32.Parse(orderId));
                     }
                     if (orderStateId != null)
                     {
@@ -39,11 +39,6 @@ namespace WebApplication1.Staff
             {
                 Response.Redirect("/Login.aspx");
             }
-
-
-
-
-
         }
 
         protected void btnFullFillOrder_Click(object sender, EventArgs e)
@@ -52,7 +47,7 @@ namespace WebApplication1.Staff
             if (orderId != null)
             {
                 string orderStateId= ddlOrderState.SelectedValue;
-                bool confirm = Staff.Repository.FullFillOrder.fullFillCustomerOrder(Int32.Parse(orderId),Int32.Parse(orderStateId));
+                bool confirm = Controller.OrderControl.fullFillCustomerOrder(Int32.Parse(orderId),Int32.Parse(orderStateId));
                 if (confirm)
                 {
                     lblFullfillOrderMessage.Text = "Order has been fullfilled successfully.";

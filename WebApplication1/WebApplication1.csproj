@@ -106,16 +106,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="C:\Users\Wiljohn\Desktop\drive-download-20220429T121913Z-001\Credentials.mdf">
-      <Link>App_Data\Credentials.mdf</Link>
-    </Content>
-    <Content Include="C:\Users\Wiljohn\Desktop\drive-download-20220429T121913Z-001\Credentials_log.ldf">
-      <Link>App_Data\Credentials_log.ldf</Link>
+    <Content Include="App_Data\Credentials.mdf" />
+    <Content Include="App_Data\Credentials_log.ldf">
       <DependentUpon>Credentials.mdf</DependentUpon>
     </Content>
-    <Content Include="C:\Users\Wiljohn\Desktop\drive-download-20220429T121913Z-001\dbo.Credentials.sql">
-      <Link>App_Data\dbo.Credentials.sql</Link>
-    </Content>
+    <Content Include="App_Data\dbo.Credentials.sql" />
     <Content Include="Content\bootstrap-5.0.2\css\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-5.0.2\css\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-5.0.2\css\bootstrap-grid.rtl.css" />
@@ -365,10 +360,6 @@
     <Compile Include="Staff\FullFillOrder.aspx.designer.cs">
       <DependentUpon>FullFillOrder.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Staff\Repository\FullFillOrder.cs" />
-    <Compile Include="Staff\Repository\UpdateItemQuantity.cs" />
-    <Compile Include="Staff\Repository\ViewCustomerOrderDetails.cs" />
-    <Compile Include="Staff\Repository\ViewCustomerOrders.cs" />
     <Compile Include="Staff\StaffLayout.Master.cs">
       <DependentUpon>StaffLayout.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
