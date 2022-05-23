@@ -22,7 +22,7 @@ namespace WebApplication1.Entity
         {
             DataTable data = new DataTable();
 
-            String sql = "Select u.username, u.staffnumber, u.phonenumber, case when u.status = 1 then 'Active' else 'Inactive' end as status, r.roleType from [dbo].[User] as u inner join [dbo].[Role] as r on u.type = r.id";
+            String sql = "Select u.username, u.staffnumber, u.phonenumber, case when u.status = 1 then 'Active' else 'Inactive' end as status, r.roleType from [dbo].[User] as u inner join [dbo].[Role] as r on u.type = r.id and r.roleType != 'owner' ";
 
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["LoginConnectionString"].ConnectionString);
             con.Open();
