@@ -180,10 +180,11 @@ namespace WebApplication1.Entity
         {
             DataTable data = new DataTable();
 
-            String sql = "Select f.path, f.menu, f.category, om.price, om.foodid, SUM(om.quantity) as quantity, (om.price * SUM(om.quantity)) as totPrice from [dbo].[Order] as o inner join  [dbo].[OrderMenu] as om on o.id = om.orderid";
+            String sql = "Select f.path, f.menu, f.category, om.price, om.foodid, SUM(om.quantity) as quantity, (om.price * SUM(om.quantity)) as totPrice, os.orderState from [dbo].[Order] as o inner join  [dbo].[OrderMenu] as om on o.id = om.orderid";
             sql += " inner join [dbo].[Food] as f on f.id = om.foodid";
+            sql += " inner join [dbo].[OrderState] as os on os.id = om.OrderStateId";
             sql += " where o.tableId = " + tableId + " and om.orderstateId IN (3,4) and o.orderstateId IN (3,4)";
-            sql += " group by f.path, f.menu, f.category, om.price, om.foodid;";
+            sql += " group by f.path, f.menu, f.category, om.price, om.foodid, os.orderState;";
 
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["LoginConnectionString"].ConnectionString);
             con.Open();

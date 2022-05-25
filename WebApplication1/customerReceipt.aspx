@@ -13,9 +13,10 @@
     <asp:GridView ID="gvReceipt" Width="50%" runat="server" RowStyle-Font-Bold="true" HeaderStyle-Font-Bold="true" BorderWidth="4px" BorderColor="#dbddff" AutoGenerateColumns="false" Height="100%">
             <Columns>
                 <asp:BoundField DataField="menu" HeaderText="Menu" HeaderStyle-Width="30%" />
-                <asp:BoundField DataField="price" HeaderText="Unit Price ($)" HeaderStyle-Width="25%" />
-                <asp:BoundField DataField="quantity" HeaderText="Order Quantity" HeaderStyle-Width="20%" />
-                <asp:BoundField DataField="totPrice" HeaderText="Total Price ($)" HeaderStyle-Width="25%" />
+                <asp:BoundField DataField="price" HeaderText="Unit Price ($)" HeaderStyle-Width="20%" />
+                <asp:BoundField DataField="quantity" HeaderText="Order Quantity" HeaderStyle-Width="15%" />
+                <asp:BoundField DataField="totPrice" HeaderText="Total Price ($)" HeaderStyle-Width="15%" />
+                <asp:BoundField DataField="orderState" HeaderText="Status" HeaderStyle-Width="20%" />
             </Columns>
      </asp:GridView>
     <br />
