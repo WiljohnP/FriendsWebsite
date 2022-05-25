@@ -23,7 +23,7 @@
            
                  </div>
                  <div class="form-group row mt-3">
-                     <asp:Label ID="lblFullfillOrderMessage" runat="server" Font-Bold="true"></asp:Label>
+                     <asp:Label ID="lblFulfilOrderMessage" runat="server" Font-Bold="true"></asp:Label>
                  </div>   
 
                   <div style="display:flex;justify-content:space-between" class="mt-3">

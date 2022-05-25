@@ -209,16 +209,16 @@ namespace WebApplication1.Controller
         {
             return Entity.Order.getOrderStates();
         }
-        //FullFill Customer Order
-        public static bool fullFillCustomerOrder(int orderId, int orderStateId)
+        //Fulfil Customer Order
+        public static bool FulfilCustomerOrder(int orderId, int orderStateId)
         {
-            return Entity.Order.fullFillCustomerOrder(orderId, orderStateId);
+            return Entity.Order.FulfilCustomerOrder(orderId, orderStateId);
         }
 
         //Get Selected Order State
-        public static string getSelectedOrderStateId(int orderId)
+        public static string getSelectedOrderStateId(int OrderMenuId)
         {
-            return Entity.Order.getSelectedOrderStateId(orderId);
+            return Entity.Order.getSelectedOrderStateId(OrderMenuId);
         }
 
 

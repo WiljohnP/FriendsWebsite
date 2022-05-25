@@ -39,11 +39,11 @@ namespace WebApplication1.Staff
                 bool confirm = Controller.OrderControl.updateItemQuantity(Int32.Parse(orderMenuId),Int32.Parse(txtItemQuantity.Text));
                 if (confirm)
                 {
-                    lblFullfillOrderMessage.Text = "Quantity has been updated successfully";
+                    lblFulfilOrderMessage.Text = "Quantity has been updated successfully";
                 }
                 else
                 {
-                    lblFullfillOrderMessage.Text = "Something went wrong please try again later.";
+                    lblFulfilOrderMessage.Text = "Something went wrong please try again later.";
                 }
 
             }

@@ -526,7 +526,7 @@ namespace WebApplication1.Entity
 
             string constr = ConfigurationManager.ConnectionStrings["LoginConnectionString"].ConnectionString;
 
-            String query = "Select Id,OrderState from OrderState";
+            String query = "Select Id,OrderState from OrderState where Id in (3,4)";
             using (SqlConnection con = new SqlConnection(constr))
             {
                 using (SqlDataAdapter sda = new SqlDataAdapter(query, con))
@@ -544,59 +544,76 @@ namespace WebApplication1.Entity
         }
 
 
-        //FullFill Customer Order
-        public static bool fullFillCustomerOrder(int orderId, int orderStateId)
+        //Fulfil Customer Order
+        public static bool FulfilCustomerOrder(int OrderMenuId, int orderStateId)
         {
             bool confirm = false;
             string constr = ConfigurationManager.ConnectionStrings["LoginConnectionString"].ConnectionString;
             using (SqlConnection connection = new SqlConnection(constr))
             {
-                string sqlUpdateOrderTable = "Update [dbo].[Order] Set orderStateId =@orderStateId, modifiedDt=@modifiedDt Where Id =@OrderId";
-
-                using (SqlCommand cmdOrder = new SqlCommand(sqlUpdateOrderTable, connection))
+                string sqlUpdateOrderMenuTable = "Update [dbo].[OrderMenu] Set OrderStateId =@OrderStateId Where Id =@OrderMenuId";
+                using (SqlCommand cmdOrderMenu = new SqlCommand(sqlUpdateOrderMenuTable, connection))
                 {
                     connection.Open();
-                    cmdOrder.Parameters.AddWithValue("@OrderId", orderId);
-                    cmdOrder.Parameters.AddWithValue("@orderStateId", orderStateId);
-                    cmdOrder.Parameters.AddWithValue("@modifiedDt", DateTime.Now.ToString());
-
-                    if (cmdOrder.ExecuteNonQuery() > 0)
+                    cmdOrderMenu.Parameters.AddWithValue("@OrderMenuId", OrderMenuId);
+                    cmdOrderMenu.Parameters.AddWithValue("@OrderStateId", orderStateId);
+                    if (cmdOrderMenu.ExecuteNonQuery() > 0)
                     {
-                        cmdOrder.Dispose();
-                        string sqlUpdateOrderMenuTable = "Update [dbo].[OrderMenu] Set OrderStateId =@OrderStateId Where OrderId =@OrderId";
-                        using (SqlCommand cmdOrderMenu = new SqlCommand(sqlUpdateOrderMenuTable, connection))
-                        {
-                            cmdOrderMenu.Parameters.AddWithValue("@OrderId", orderId);
-                            cmdOrderMenu.Parameters.AddWithValue("@OrderStateId", orderStateId);
-                            if (cmdOrderMenu.ExecuteNonQuery() > 0)
-                            {
-                                confirm = true;
-                                cmdOrderMenu.Dispose();
-                                connection.Close();
-                            }
-
-                        }
-
+                        confirm = true;
+                        cmdOrderMenu.Dispose();
                     }
 
                 }
+
+                //check if any more items unfulfilled in order
+                string sqlSelectOrderMenuTableByOrderId = "select count(*) from [dbo].[OrderMenu] where OrderId = @OrderMenuId and OrderStateId = 3";
+                using (SqlCommand cmdOrderMenuCheck = new SqlCommand(sqlSelectOrderMenuTableByOrderId, connection))
+                {
+                    cmdOrderMenuCheck.Parameters.AddWithValue("@OrderMenuId", OrderMenuId);
+                    //if there are no more unfulfilled items, order id to complete
+                    string sqlSelectOrderIdByMenuId = "select OrderId from [dbo].[OrderMenu] where id = @OrderMenuId";
+                    using (SqlCommand cmdSelectOrderCheck = new SqlCommand(sqlSelectOrderIdByMenuId, connection))
+                    {
+                        cmdSelectOrderCheck.Parameters.AddWithValue("@OrderMenuId", OrderMenuId);
+                        int check = Convert.ToInt32(cmdOrderMenuCheck.ExecuteScalar().ToString());
+                        if (check == 0)
+                        {
+                            string sqlUpdateOrderTable = "Update [dbo].[Order] Set orderStateId =@orderStateId, modifiedDt=@modifiedDt Where Id =@OrderId";
+
+                            using (SqlCommand cmdOrder = new SqlCommand(sqlUpdateOrderTable, connection))
+                            {
+
+                                cmdOrder.Parameters.AddWithValue("@OrderId", cmdSelectOrderCheck.ExecuteScalar().ToString());
+                                cmdOrder.Parameters.AddWithValue("@orderStateId", orderStateId);
+                                cmdOrder.Parameters.AddWithValue("@modifiedDt", DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.fffZ"));
+
+                                if (cmdOrder.ExecuteNonQuery() > 0)
+                                {
+                                    cmdOrder.Dispose();
+                                }
+
+                            }
+                        }
+                    }
+                }
+                connection.Close();
             }
             return confirm;
         }
 
 
         //Get Selected Order State
-        public static string getSelectedOrderStateId(int OrderId)
+        public static string getSelectedOrderStateId(int OrderMenuId)
         {
             string constr = ConfigurationManager.ConnectionStrings["LoginConnectionString"].ConnectionString;
             var selectedOrderStateId = "";
             using (SqlConnection connection = new SqlConnection(constr))
             {
-                string sql = "Select orderStateId from [dbo].[Order] where Id=@OrderId";
+                string sql = "Select orderStateId from [dbo].[OrderMenu] where Id=@OrderMenuId";
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
                     connection.Open();
-                    command.Parameters.AddWithValue("@OrderId", OrderId);
+                    command.Parameters.AddWithValue("@OrderMenuId", OrderMenuId);
                     SqlDataReader rdr = command.ExecuteReader();
                     if (rdr.HasRows)
                     {
@@ -628,7 +645,7 @@ namespace WebApplication1.Entity
 
             string constr = ConfigurationManager.ConnectionStrings["LoginConnectionString"].ConnectionString;
 
-            String query = " Select [dbo].[Order].Id as OrderId,[dbo].[OrderMenu].Id as OrderMenuId, [dbo].[Table].uen, [dbo].[Food].category, [dbo].[Food].menu,[dbo].[Food].path,[dbo].[Food].price,[dbo].[Order].createdDt,[dbo].[Order].modifiedDt,[dbo].[OrderMenu].Quantity,[dbo].[OrderState].orderState FROM [dbo].[Order] inner join  [dbo].[Table] on [dbo].[Order].tableId=[dbo].[Table].Id inner join  [dbo].[OrderMenu] on [dbo].[Order].Id=[dbo].[OrderMenu].OrderId inner join [dbo].[OrderState] on [dbo].[OrderMenu].OrderStateId=[dbo].[OrderState].Id inner join Food on[dbo].[OrderMenu].FoodId=[dbo].[Food].Id";
+            String query = "Select [dbo].[Order].Id as OrderId,[dbo].[OrderMenu].Id as OrderMenuId, [dbo].[Table].uen, [dbo].[Food].category, [dbo].[Food].menu,[dbo].[Food].path,[dbo].[Food].price,[dbo].[Order].createdDt,[dbo].[Order].modifiedDt,[dbo].[OrderMenu].Quantity,[dbo].[OrderState].orderState FROM [dbo].[Order] inner join  [dbo].[Table] on [dbo].[Order].tableId=[dbo].[Table].Id inner join  [dbo].[OrderMenu] on [dbo].[Order].Id=[dbo].[OrderMenu].OrderId inner join [dbo].[OrderState] on [dbo].[OrderMenu].OrderStateId=[dbo].[OrderState].Id inner join Food on[dbo].[OrderMenu].FoodId=[dbo].[Food].Id where [dbo].[OrderMenu].orderStateId = 3";
             using (SqlConnection con = new SqlConnection(constr))
             {
                 using (SqlDataAdapter sda = new SqlDataAdapter(query, con))

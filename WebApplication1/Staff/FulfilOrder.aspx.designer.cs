@@ -11,7 +11,7 @@ namespace WebApplication1.Staff
 {
 
 
-    public partial class FullFillOrder
+    public partial class FulfilOrder
     {
 
         /// <summary>
@@ -33,13 +33,13 @@ namespace WebApplication1.Staff
         protected global::System.Web.UI.WebControls.DropDownList ddlOrderState;
 
         /// <summary>
-        /// lblFullfillOrderMessage control.
+        /// lblFulfilOrderMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblFullfillOrderMessage;
+        protected global::System.Web.UI.WebControls.Label lblFulfilOrderMessage;
 
         /// <summary>
         /// btnUpdateOrderState control.

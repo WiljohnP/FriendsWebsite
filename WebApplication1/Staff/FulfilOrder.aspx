@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Staff/StaffLayout.Master" AutoEventWireup="true" CodeBehind="FullFillOrder.aspx.cs" Inherits="WebApplication1.Staff.FullFillOrder" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Staff/StaffLayout.Master" AutoEventWireup="true" CodeBehind="FulfilOrder.aspx.cs" Inherits="WebApplication1.Staff.FulfilOrder" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
    <br/>
@@ -11,7 +11,7 @@
             <div class="card">
                 <div class="card-header bg-success text-white">
                     <div class="card-title">
-                        <h5>Fullfill Customer Order</h5>
+                        <h5>Fulfil Customer Order</h5>
                     </div>
                 </div>
                 <div class="card-body">
@@ -24,11 +24,11 @@
            
                  </div>
                  <div class="form-group row mt-3">
-                     <asp:Label ID="lblFullfillOrderMessage" runat="server" Font-Bold="true"></asp:Label>
+                     <asp:Label ID="lblFulfilOrderMessage" runat="server" Font-Bold="true"></asp:Label>
                  </div>   
 
                   <div style="display:flex;justify-content:space-between" class="mt-3">
-                    <asp:Button ID="btnUpdateOrderState" runat="server" Text="Update"  CssClass="btn btn-success btn-block" OnClick="btnFullFillOrder_Click"/>
+                    <asp:Button ID="btnUpdateOrderState" runat="server" Text="Update"  CssClass="btn btn-success btn-block" OnClick="btnFulfilOrder_Click"/>
                     <a href="/Staff/ViewCustomerOrders.aspx" class="btn btn-primary">Go Back</a>  
                   </div>
                 </div>

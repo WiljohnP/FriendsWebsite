@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace WebApplication1.Staff
 {
-    public partial class FullFillOrder : System.Web.UI.Page
+    public partial class FulfilOrder : System.Web.UI.Page
     {
         public int OrderId { get; set; }
         protected void Page_Load(object sender, EventArgs e)
@@ -22,10 +22,10 @@ namespace WebApplication1.Staff
                     ddlOrderState.DataValueField = "Id";
                     ddlOrderState.DataTextField = "orderState";
                     ddlOrderState.DataBind();
-                    string orderId = Request.QueryString["OrderId"];
-                    if (orderId != null)
+                    string OrderMenuId = Request.QueryString["OrderMenuId"];
+                    if (OrderMenuId != null)
                     {
-                        orderStateId = Controller.OrderControl.getSelectedOrderStateId(Int32.Parse(orderId));
+                        orderStateId = Controller.OrderControl.getSelectedOrderStateId(Int32.Parse(OrderMenuId));
                     }
                     if (orderStateId != null)
                     {
@@ -41,20 +41,20 @@ namespace WebApplication1.Staff
             }
         }
 
-        protected void btnFullFillOrder_Click(object sender, EventArgs e)
+        protected void btnFulfilOrder_Click(object sender, EventArgs e)
         {
-            string orderId = Request.QueryString["OrderId"];
-            if (orderId != null)
+            string OrderMenuId = Request.QueryString["OrderMenuId"];
+            if (OrderMenuId != null)
             {
                 string orderStateId= ddlOrderState.SelectedValue;
-                bool confirm = Controller.OrderControl.fullFillCustomerOrder(Int32.Parse(orderId),Int32.Parse(orderStateId));
+                bool confirm = Controller.OrderControl.FulfilCustomerOrder(Int32.Parse(OrderMenuId),Int32.Parse(orderStateId));
                 if (confirm)
                 {
-                    lblFullfillOrderMessage.Text = "Order has been fullfilled successfully.";
+                    lblFulfilOrderMessage.Text = "Order has been Fulfiled successfully.";
                 }
                 else
                 {
-                    lblFullfillOrderMessage.Text = "Something went wrong please try again later.";
+                    lblFulfilOrderMessage.Text = "Something went wrong please try again later.";
                 }
 
             }

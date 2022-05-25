@@ -226,7 +226,7 @@
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="StaffMenu.aspx" />
-    <Content Include="Staff\FullFillOrder.aspx" />
+    <Content Include="Staff\FulfilOrder.aspx" />
     <Content Include="Staff\UpdateItemQuantity.aspx" />
     <Content Include="Staff\ViewCustomerOrderDetails.aspx" />
     <Content Include="Staff\ViewCustomerOrders.aspx" />
@@ -361,12 +361,12 @@
     <Compile Include="StaffMenu.aspx.designer.cs">
       <DependentUpon>StaffMenu.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Staff\FullFillOrder.aspx.cs">
-      <DependentUpon>FullFillOrder.aspx</DependentUpon>
+    <Compile Include="Staff\FulfilOrder.aspx.cs">
+      <DependentUpon>FulfilOrder.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Staff\FullFillOrder.aspx.designer.cs">
-      <DependentUpon>FullFillOrder.aspx</DependentUpon>
+    <Compile Include="Staff\FulfilOrder.aspx.designer.cs">
+      <DependentUpon>FulfilOrder.aspx</DependentUpon>
     </Compile>
     <Compile Include="Staff\StaffLayout.Master.cs">
       <DependentUpon>StaffLayout.Master</DependentUpon>

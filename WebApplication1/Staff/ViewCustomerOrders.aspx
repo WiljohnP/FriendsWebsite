@@ -27,10 +27,10 @@
                     <asp:BoundField DataField="Quantity" HeaderText="Quantity" />
           <%--          <asp:BoundField DataField="orderState" HeaderText="Order State" /> --%>
                     <asp:HyperLinkField
-                    HeaderText="FullFillOrder"
-                    Text="Full Fill Order"
-                    DataNavigateUrlFields="OrderId" 
-                    DataNavigateUrlFormatString="/Staff/FullFillOrder.aspx?OrderId={0}" />
+                    HeaderText="Fulfil Order"
+                    Text="Fulfil Order"
+                    DataNavigateUrlFields="OrderMenuId" 
+                    DataNavigateUrlFormatString="/Staff/FulFilOrder.aspx?OrderMenuId={0}" />
 
 
                     <asp:HyperLinkField
