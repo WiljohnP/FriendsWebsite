@@ -45,7 +45,7 @@ namespace WebApplication1.Entity
             SqlConnection con = new SqlConnection(cs);
 
             con.Open();
-            string query_user = "SELECT count(*) FROM [dbo].[User] WHERE Username='" + tb1 + "'";
+            string query_user = "SELECT count(*) FROM [dbo].[User] WHERE Username='" + tb1 + "' and status = 1";
             SqlCommand user_com = new SqlCommand(query_user, con);
             int userExists = Convert.ToInt32(user_com.ExecuteScalar().ToString());
             con.Close();

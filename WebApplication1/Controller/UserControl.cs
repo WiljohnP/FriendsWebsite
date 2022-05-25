@@ -43,11 +43,13 @@ namespace WebApplication1.Controller
                 string ret = validatePassword(tb1, tbpassword);
                 if (ret != "wrong password")
                 {
-                    if (ret == "manager" || ret == "staff" || ret == "owner") { return ret; } // login successful
+                    if (ret == "manager" || ret == "staff" || ret == "owner") { 
+                        return ret; 
+                    } // login successful
                     else { return "error"; } // error
                 }
                 else { return "fail"; } // wrong password
-            } else { return "fail"; } // user doesnt exists
+            } else { return "fail"; } // user doesnt exists or inactive
 
         }
 
