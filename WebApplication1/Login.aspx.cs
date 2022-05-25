@@ -33,7 +33,7 @@ namespace WebApplication1
 
                 if ( ret == "manager" ) { Response.Redirect("managerMenu.aspx"); }
                 else if ( ret == "staff" ) { Response.Redirect("Staff/ViewCustomerOrders.aspx"); }
-                else if ( ret == "owner" ) { Response.Redirect("ownerYearlyStatistics.aspx"); }
+                else if ( ret == "owner" ) { Response.Redirect("ownerDailyStatistics.aspx"); }
                 else if ( ret == "error" ) { Response.Write("<script>alert('ERROR!!!!!')</script>"); }
             }
         }
